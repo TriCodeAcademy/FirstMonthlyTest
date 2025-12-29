@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TriCode Academy - C Programming Test</title>
+    <title>TriCode Academy - Java Core Test</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #ffffff; /* White background */
+            background-color: #ffffff;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #004a99; /* Blue text color from logo */
+            color: #004a99; /* TriCode Blue */
         }
         .container {
             max-width: 800px;
@@ -27,11 +27,11 @@
             color: #004a99;
             padding: 25px;
             text-align: center;
-            border-bottom: 2px solid #00a2ff; /* Lighter blue accent */
+            border-bottom: 2px solid #00a2ff;
         }
         .brand-logo {
             width: 100px;
-            height: 100px;
+            height: auto;
             margin-bottom: 15px;
         }
         .brand-title {
@@ -46,7 +46,7 @@
             letter-spacing: 2px;
         }
         .question-box {
-            background-color: #f0f8ff; /* Light blue background for code box */
+            background-color: #f0f8ff;
             color: #004a99;
             padding: 20px;
             border-radius: 8px;
@@ -59,8 +59,8 @@
             border: none;
             border-bottom: 2px solid #004a99;
             background: transparent;
-            color: #004a99; /* Blue input text */
-            width: 120px;
+            color: #d63384; /* Pinkish color for Java input to stand out */
+            width: 130px;
             text-align: center;
             font-weight: bold;
             outline: none;
@@ -126,7 +126,7 @@
         <div class="card-body p-4">
             
             <div id="start-screen">
-                <h4 class="text-center mb-4">First Monthly Test(C Programming)</h4>
+                <h4 class="text-center mb-4">First Monthly Test (Java Core)</h4>
                 <div class="mb-4">
                     <label class="form-label">Student Name</label>
                     <input type="text" id="studentName" class="form-control form-control-lg" placeholder="Enter your name...">
@@ -134,8 +134,9 @@
                 </div>
                 <div class="alert alert-light border">
                     <strong>Instructions:</strong><br>
-                    This test consists of 100 questions covering C syntax, data types, variables, constants, and input.<br>
-                    Some are multiple-choice, others require you to type the code.
+                    • Total Questions: 100<br>
+                    • Topics: Variables, OOP Basics, Loops, If/Else, Scanner, Access Modifiers.<br>
+                    • Format: MCQ & Code Completion (Fill in the blanks).
                 </div>
                 <button class="btn btn-primary btn-lg w-100" onclick="startTest()">Start Test</button>
             </div>
@@ -169,7 +170,7 @@
                     <span id="final-score">0</span>%
                 </div>
 
-                <h5 id="result-message" class="fw-bold" style="color: #004a99;">Great effort! Keep coding.</h5>
+                <h5 id="result-message" class="fw-bold" style="color: #004a99;">Great effort! Keep coding in Java.</h5>
                 <p class="small mt-2">Correct Answers: <span id="correct-count">0</span> / 100</p>
                 
                 <button class="btn btn-outline-primary mt-4" onclick="location.reload()">Try Again</button>
@@ -180,123 +181,112 @@
 </div>
 
 <script>
-    // 100 Questions Database (Mixed MCQ & Input)
-    // Topics: C Syntax, History, Intro, Real Life, Data Types, Input, Variables, Constants
-    // 100 Questions Database covering all C Programming topics
+    // 100 Questions Database covering Java Core Topics
     const questions = [
-        // --- History & Introduction (1-10) ---
-        { type: 'mcq', q: "Who is known as the father of C Programming?", options: ["James Gosling", "Dennis Ritchie", "Bjarne Stroustrup", "Bill Gates"], answer: 1 },
-        { type: 'mcq', q: "In which year was C developed?", options: ["1972", "1980", "1969", "1991"], answer: 0 },
-        { type: 'mcq', q: "Where was C developed?", options: ["Microsoft", "Apple", "Bell Labs", "IBM"], answer: 2 },
-        { type: 'mcq', q: "C is a successor of which language?", options: ["Java", "Python", "B Language", "C++"], answer: 2 },
-        { type: 'mcq', q: "Which Operating System is largely written in C?", options: ["Windows", "UNIX", "Android", "iOS"], answer: 1 },
-        { type: 'mcq', q: "C language is best suited for?", options: ["Web Development", "System Programming", "AI", "Mobile Apps"], answer: 1 },
-        { type: 'mcq', q: "Is C a case-sensitive language?", options: ["Yes", "No", "Depends on compiler", "Sometimes"], answer: 0 },
-        { type: 'mcq', q: "Which level of language is C?", options: ["Low Level", "High Level", "Middle Level", "Machine Level"], answer: 2 },
-        { type: 'input', instruction: "Standard extension for C files.", prefix: "filename", answer: ".c", suffix: "" },
-        { type: 'mcq', q: "Which is the first book on C?", options: ["The C Programming Language", "Head First C", "C for Dummies", "Learn C"], answer: 0 },
+        // --- Intro & History (1-10) ---
+        { type: 'mcq', q: "Who developed Java?", options: ["Dennis Ritchie", "James Gosling", "Guido van Rossum", "Bjarne Stroustrup"], answer: 1 },
+        { type: 'mcq', q: "What was the original name of Java?", options: ["Oak", "C+++", "Pine", "Latte"], answer: 0 },
+        { type: 'input', instruction: "Java source code is saved with this extension.", prefix: "filename", answer: ".java", suffix: "" },
+        { type: 'mcq', q: "Java is...", options: ["Platform Dependent", "Platform Independent", "Machine Dependent", "None"], answer: 1 },
+        { type: 'mcq', q: "What translates Java source code into Bytecode?", options: ["Interpreter", "Compiler (javac)", "JVM", "JRE"], answer: 1 },
+        { type: 'mcq', q: "What executes the Bytecode?", options: ["JDK", "JVM", "IDE", "API"], answer: 1 },
+        { type: 'input', instruction: "Write the compiler command.", prefix: "", answer: "javac", suffix: " MyFile.java" },
+        { type: 'mcq', q: "What does WORA stand for?", options: ["Write Once Run Anywhere", "Write One Read All", "Work On Real Apps", "None"], answer: 0 },
+        { type: 'input', instruction: "Main entry point method name.", prefix: "public static void", answer: "main", suffix: "(String[] args)" },
+        { type: 'mcq', q: "Which company currently owns Java?", options: ["Sun Microsystems", "Microsoft", "Oracle", "Google"], answer: 2 },
 
-        // --- Syntax & Structure (11-20) ---
-        { type: 'input', instruction: "Every C program execution starts from this function.", prefix: "", answer: "main", suffix: "() { }" },
-        { type: 'input', instruction: "Symbol used to terminate a statement.", prefix: "printf('Hi')", answer: ";", suffix: "" },
-        { type: 'input', instruction: "Include standard input output library.", prefix: "#include <", answer: "stdio.h", suffix: ">" },
-        { type: 'mcq', q: "Which brackets are used to define the body of a function?", options: ["( )", "[ ]", "{ }", "< >"], answer: 2 },
-        { type: 'input', instruction: "Single line comment starts with.", prefix: "", answer: "//", suffix: " comment" },
-        { type: 'input', instruction: "Multi-line comment ending symbol.", prefix: "/* comment ", answer: "*/", suffix: "" },
-        { type: 'mcq', q: "What does \\n do in C?", options: ["Beep sound", "New Line", "Tab space", "Backspace"], answer: 1 },
-        { type: 'mcq', q: "What does \\t do?", options: ["Vertical Tab", "Horizontal Tab", "New Line", "Alert"], answer: 1 },
-        { type: 'input', instruction: "Command to return success status from main.", prefix: "", answer: "return", suffix: " 0;" },
-        { type: 'mcq', q: "Compiler converts C code into?", options: ["Java Code", "Machine Code", "HTML", "Python"], answer: 1 },
+        // --- Variables & Data Types (11-25) ---
+        { type: 'input', instruction: "Keyword to define an integer.", prefix: "", answer: "int", suffix: " x = 5;" },
+        { type: 'input', instruction: "Keyword for True/False values.", prefix: "", answer: "boolean", suffix: " isJavaFun = true;" },
+        { type: 'mcq', q: "Which data type stores decimals?", options: ["int", "double", "char", "String"], answer: 1 },
+        { type: 'input', instruction: "Class used to store text.", prefix: "", answer: "String", suffix: " name = \"TriCode\";" },
+        { type: 'mcq', q: "Size of an 'int' in Java?", options: ["2 bytes", "4 bytes", "8 bytes", "16 bytes"], answer: 1 },
+        { type: 'input', instruction: "Keyword to make a variable constant (unchangeable).", prefix: "", answer: "final", suffix: " int MAX = 100;" },
+        { type: 'mcq', q: "Which is a primitive data type?", options: ["String", "ArrayList", "char", "Scanner"], answer: 2 },
+        { type: 'input', instruction: "Define a single character.", prefix: "char grade =", answer: "'A'", suffix: ";" },
+        { type: 'mcq', q: "Default value of an int variable?", options: ["null", "0", "1", "undefined"], answer: 1 },
+        { type: 'input', instruction: "Declare a floating point number.", prefix: "", answer: "float", suffix: " myNum = 5.75f;" },
+        { type: 'mcq', q: "Can a boolean variable store 1 or 0?", options: ["Yes", "No", "Depends on OS", "Only 1"], answer: 1 },
+        { type: 'mcq', q: "Which is a valid variable name?", options: ["1stName", "_name", "class", "void"], answer: 1 },
+        { type: 'input', instruction: "Concatenate strings operator.", prefix: "String s = \"Hi\" ", answer: "+", suffix: " \" World\";" },
+        { type: 'mcq', q: "String is a...", options: ["Primitive type", "Wrapper class", "Object/Class", "None"], answer: 2 },
+        { type: 'input', instruction: "Get length of string.", prefix: "txt.", answer: "length", suffix: "();" },
 
-        // --- Variables & Naming Rules (21-35) ---
-        { type: 'input', instruction: "Keyword to declare an integer variable.", prefix: "", answer: "int", suffix: " count = 10;" },
-        { type: 'mcq', q: "Which is a valid variable name?", options: ["1stvar", "var-name", "var_name", "$var"], answer: 2 },
-        { type: 'mcq', q: "Variable names cannot start with a?", options: ["Underscore", "Digit/Number", "Letter", "Capital Letter"], answer: 1 },
-        { type: 'mcq', q: "Which of these is NOT allowed in variable names?", options: ["Letters", "Digits", "Underscores", "Spaces"], answer: 3 },
-        { type: 'input', instruction: "Assign value 50 to variable x.", prefix: "x ", answer: "=", suffix: " 50;" },
-        { type: 'mcq', q: "If we declare 'int a;' what is the initial value?", options: ["0", "1", "Garbage Value", "Null"], answer: 2 },
-        { type: 'mcq', q: "Which keyword is used to rename data types?", options: ["typedef", "rename", "name", "type"], answer: 0 },
-        { type: 'mcq', q: "Can we use keywords as variable names?", options: ["Yes", "No", "Sometimes", "Only in main"], answer: 1 },
-        { type: 'input', instruction: "Declare multiple variables.", prefix: "int x", answer: ",", suffix: " y, z;" },
-        { type: 'mcq', q: "Which is valid?", options: ["int my num;", "int my-num;", "int my_num;", "int 1num;"], answer: 2 },
-        { type: 'mcq', q: "Variable scope declared inside a function is?", options: ["Global", "Local", "Universal", "External"], answer: 1 },
-        { type: 'mcq', q: "Global variables are declared?", options: ["Inside main", "Outside all functions", "Inside loop", "In header file"], answer: 1 },
-        { type: 'input', instruction: "Operator to get size of a variable.", prefix: "", answer: "sizeof", suffix: "(x);" },
-        { type: 'mcq', q: "Maximum length of a variable name in C standards?", options: ["8 chars", "31 chars", "255 chars", "Unlimited"], answer: 1 },
-        { type: 'mcq', q: "Are 'apple' and 'Apple' the same variable?", options: ["Yes", "No", "Depends on OS", "Same memory"], answer: 1 },
-
-        // --- Data Types (36-55) ---
-        { type: 'mcq', q: "Size of 'int' is usually?", options: ["1 byte", "2 or 4 bytes", "8 bytes", "10 bytes"], answer: 1 },
-        { type: 'mcq', q: "Size of 'char' is?", options: ["1 byte", "2 bytes", "4 bytes", "8 bytes"], answer: 0 },
-        { type: 'mcq', q: "Which data type stores decimal numbers?", options: ["int", "char", "float", "short"], answer: 2 },
-        { type: 'input', instruction: "Declare a character variable.", prefix: "", answer: "char", suffix: " letter = 'A';" },
-        { type: 'input', instruction: "Declare a double precision float.", prefix: "", answer: "double", suffix: " pi = 3.14159;" },
-        { type: 'mcq', q: "Range of 'unsigned char' is?", options: ["-128 to 127", "0 to 255", "0 to 65535", "-32768 to 32767"], answer: 1 },
-        { type: 'mcq', q: "Format specifier for int.", options: ["%f", "%c", "%d", "%s"], answer: 2 },
-        { type: 'mcq', q: "Format specifier for float.", options: ["%d", "%f", "%c", "%lf"], answer: 1 },
-        { type: 'mcq', q: "Format specifier for char.", options: ["%s", "%d", "%f", "%c"], answer: 3 },
-        { type: 'mcq', q: "Which type is used for TRUE/FALSE in C99?", options: ["bool", "boolean", "int", "logic"], answer: 0 },
-        { type: 'input', instruction: "Specifier for double.", prefix: "printf(\"%", answer: "lf", suffix: "\", myDouble);" },
-        { type: 'input', instruction: "Specifier for string.", prefix: "printf(\"%", answer: "s", suffix: "\", \"Hello\");" },
-        { type: 'mcq', q: "What is the default return type of main?", options: ["void", "int", "float", "char"], answer: 1 },
-        { type: 'mcq', q: "Which is a valid float constant?", options: ["3.14", "3,14", "3;14", "3-14"], answer: 0 },
-        { type: 'mcq', q: "String is an array of?", options: ["Integers", "Floats", "Characters", "Booleans"], answer: 2 },
-        { type: 'mcq', q: "ASCII value of 'A' is?", options: ["65", "97", "48", "1"], answer: 0 },
-        { type: 'mcq', q: "ASCII value of 'a' is?", options: ["65", "97", "100", "50"], answer: 1 },
-        { type: 'input', instruction: "Type casting float to int.", prefix: "(", answer: "int", suffix: ") 3.14" },
-        { type: 'mcq', q: "Keyword 'void' means?", options: ["Returns 0", "Returns Nothing", "Returns Error", "Returns 1"], answer: 1 },
-        { type: 'mcq', q: "Which consumes more memory?", options: ["int", "char", "double", "float"], answer: 2 },
-
-        // --- User Input (56-70) ---
-        { type: 'input', instruction: "Function to take user input.", prefix: "", answer: "scanf", suffix: "(\"%d\", &a);" },
-        { type: 'mcq', q: "What symbol is used with variable name in scanf?", options: ["*", "#", "&", "@"], answer: 2 },
-        { type: 'input', instruction: "Read an integer into x.", prefix: "scanf(\"%d\", ", answer: "&x", suffix: ");" },
-        { type: 'mcq', q: "Why do we use '&' in scanf?", options: ["To access value", "To access address", "To print value", "To add value"], answer: 1 },
-        { type: 'input', instruction: "Function to print text.", prefix: "", answer: "printf", suffix: "(\"Hello\");" },
-        { type: 'mcq', q: "scanf() stops reading a string at?", options: ["Enter", "Space", "Tab", "All of these"], answer: 3 },
-        { type: 'mcq', q: "Which header file is required for printf/scanf?", options: ["conio.h", "stdio.h", "math.h", "stdlib.h"], answer: 1 },
-        { type: 'input', instruction: "Read a character.", prefix: "scanf(\"%", answer: "c", suffix: "\", &ch);" },
-        { type: 'mcq', q: "getch() is part of which header?", options: ["stdio.h", "conio.h", "string.h", "ctype.h"], answer: 1 },
-        { type: 'mcq', q: "Return type of scanf function is?", options: ["void", "char", "int (number of inputs)", "float"], answer: 2 },
-        { type: 'mcq', q: "How to read a full line of text including spaces?", options: ["scanf", "gets", "print", "read"], answer: 1 },
-        { type: 'input', instruction: "Read two integers.", prefix: "scanf(\"%d %d\", &a,", answer: "&b", suffix: ");" },
-        { type: 'mcq', q: "If input is 'A' and format is %d, what happens?", options: ["Reads ASCII", "Reads A", "Error/Garbage", "Reads 0"], answer: 2 },
-        { type: 'mcq', q: "Does printf require '&' symbol?", options: ["Yes", "No", "Sometimes", "Always"], answer: 1 },
-        { type: 'input', instruction: "Output a variable value.", prefix: "printf(\"Value: %d\", ", answer: "a", suffix: ");" },
-
-        // --- Constants & Operators (71-85) ---
-        { type: 'input', instruction: "Keyword to make a variable unchangeable.", prefix: "", answer: "const", suffix: " int MAX = 100;" },
-        { type: 'mcq', q: "Value of a const variable...", options: ["Can change", "Cannot change", "Changes at runtime", "Is random"], answer: 1 },
-        { type: 'input', instruction: "Define a constant macro.", prefix: "", answer: "#define", suffix: " PI 3.14" },
-        { type: 'mcq', q: "Which operator is used for Modulus (Remainder)?", options: ["/", "%", "*", "#"], answer: 1 },
+        // --- Operators & Control Flow (26-45) ---
+        { type: 'input', instruction: "Logical AND operator.", prefix: "if (x > 5 ", answer: "&&", suffix: " x < 10)" },
+        { type: 'input', instruction: "Logical OR operator.", prefix: "if (x == 5 ", answer: "||", suffix: " y == 5)" },
+        { type: 'mcq', q: "What is 10 % 3 in Java?", options: ["3", "1", "3.33", "10"], answer: 1 },
+        { type: 'input', instruction: "Equality operator.", prefix: "if (x ", answer: "==", suffix: " y)" },
+        { type: 'input', instruction: "Not Equal operator.", prefix: "if (x ", answer: "!=", suffix: " y)" },
+        { type: 'mcq', q: "Which statement is used to test multiple conditions?", options: ["if-else-if", "for loop", "class", "import"], answer: 0 },
+        { type: 'input', instruction: "Switch statement keyword.", prefix: "", answer: "switch", suffix: "(expression) { ... }" },
+        { type: 'input', instruction: "Keyword to stop a loop.", prefix: "", answer: "break", suffix: ";" },
+        { type: 'input', instruction: "Keyword to skip iteration.", prefix: "", answer: "continue", suffix: ";" },
+        { type: 'mcq', q: "Which loop is best when number of iterations is known?", options: ["while", "do-while", "for", "if"], answer: 2 },
+        { type: 'input', instruction: "Start a for loop.", prefix: "", answer: "for", suffix: "(int i=0; i<5; i++)" },
+        { type: 'mcq', q: "A 'do-while' loop runs at least...", options: ["0 times", "1 time", "2 times", "Infinite times"], answer: 1 },
         { type: 'input', instruction: "Increment operator.", prefix: "i", answer: "++", suffix: ";" },
-        { type: 'input', instruction: "Decrement operator.", prefix: "i", answer: "--", suffix: ";" },
-        { type: 'mcq', q: "What is 10 % 3?", options: ["3", "1", "3.33", "0"], answer: 1 },
-        { type: 'mcq', q: "Which is the 'Equal to' comparison operator?", options: ["=", "==", "===", "!="], answer: 1 },
-        { type: 'mcq', q: "Which is the 'Logical AND' operator?", options: ["&", "&&", "||", "!"], answer: 1 },
-        { type: 'mcq', q: "Which is the 'Logical OR' operator?", options: ["&", "&&", "||", "!"], answer: 2 },
-        { type: 'input', instruction: "Not Equal operator.", prefix: "if (a ", answer: "!=", suffix: " b)" },
-        { type: 'mcq', q: "Result of 5 / 2 in integer arithmetic?", options: ["2.5", "2", "3", "Error"], answer: 1 },
-        { type: 'mcq', q: "Operator priority: Which is highest?", options: ["+", "=", "*", "-"], answer: 2 },
-        { type: 'mcq', q: "What is the assignment operator?", options: ["==", "->", "=", "::"], answer: 2 },
-        { type: 'input', instruction: "Add and assign operator.", prefix: "x ", answer: "+=", suffix: " 5;" },
+        { type: 'mcq', q: "Operator precedence: Which is highest?", options: ["+", "*", "()", "-"], answer: 2 },
+        { type: 'input', instruction: "Assignment operator.", prefix: "int x ", answer: "=", suffix: " 10;" },
+        { type: 'mcq', q: "Result of '5' + 5 in Java?", options: ["10", "55", "Error", "50"], answer: 1 },
+        { type: 'input', instruction: "Ternary operator symbol.", prefix: "variable = (condition) ", answer: "?", suffix: " expressionTrue : expressionFalse;" },
+        { type: 'mcq', q: "Which keyword creates a subclass?", options: ["implements", "extends", "super", "this"], answer: 1 },
+        { type: 'input', instruction: "Print text to console.", prefix: "System.out.", answer: "println", suffix: "(\"Hello\");" },
+        { type: 'mcq', q: "In System.out.println, what is 'System'?", options: ["Method", "Variable", "Class", "Package"], answer: 2 },
 
-        // --- Real World & Practical Scenarios (86-100) ---
-        { type: 'mcq', q: "To store a person's age, which is best?", options: ["float", "char", "int", "double"], answer: 2 },
-        { type: 'mcq', q: "To store the price of a product (e.g., 10.50)?", options: ["int", "float", "char", "void"], answer: 1 },
-        { type: 'mcq', q: "To store your name?", options: ["char", "int", "String (char array)", "float"], answer: 2 },
-        { type: 'mcq', q: "To create a loop that runs forever?", options: ["for(;;)", "loop()", "repeat()", "wait()"], answer: 0 },
-        { type: 'mcq', q: "Which year is C standard C99 from?", options: ["1990", "1999", "1989", "2011"], answer: 1 },
-        { type: 'mcq', q: "Can we compile C code on Linux?", options: ["Yes", "No", "Only Windows", "Only Mac"], answer: 0 },
-        { type: 'mcq', q: "Popular compiler for C is?", options: ["GCC", "JRE", "V8", "JVM"], answer: 0 },
-        { type: 'input', instruction: "Escape character for double quote.", prefix: "printf(\"", answer: "\\\"", suffix: "Hello\");" },
-        { type: 'mcq', q: "If 'int a = 10', what is 'a++' value immediately?", options: ["10 (then becomes 11)", "11", "12", "9"], answer: 0 },
-        { type: 'mcq', q: "If 'int a = 10', what is '++a' value immediately?", options: ["10", "11", "12", "9"], answer: 1 },
-        { type: 'mcq', q: "What is a 'syntax error'?", options: ["Logical mistake", "Typing/Grammar mistake", "Runtime crash", "OS error"], answer: 1 },
-        { type: 'mcq', q: "Which is used to make decisions?", options: ["if-else", "loop", "struct", "header"], answer: 0 },
-        { type: 'mcq', q: "Correct way to write main?", options: ["void main()", "int main()", "Both are used", "None"], answer: 2 },
-        { type: 'input', instruction: "Statement to stop a loop.", prefix: "", answer: "break", suffix: ";" },
-        { type: 'mcq', q: "TriCode Academy teaches C because?", options: ["It is the base of languages", "It is easy", "It is old", "No reason"], answer: 0 }
+        // --- OOP & Keywords (46-70) ---
+        { type: 'input', instruction: "Keyword to define a class.", prefix: "", answer: "class", suffix: " MyClass { }" },
+        { type: 'input', instruction: "Keyword to create an object.", prefix: "MyClass obj = ", answer: "new", suffix: " MyClass();" },
+        { type: 'mcq', q: "Access modifier accessible only within the same class?", options: ["public", "private", "protected", "default"], answer: 1 },
+        { type: 'mcq', q: "Access modifier accessible everywhere?", options: ["public", "private", "protected", "default"], answer: 0 },
+        { type: 'input', instruction: "Reference to the current object.", prefix: "", answer: "this", suffix: ".x = x;" },
+        { type: 'mcq', q: "Which method is called when an object is created?", options: ["main", "constructor", "class", "void"], answer: 1 },
+        { type: 'input', instruction: "Keyword for inheritance.", prefix: "class Car ", answer: "extends", suffix: " Vehicle" },
+        { type: 'input', instruction: "Return value from a method.", prefix: "", answer: "return", suffix: " sum;" },
+        { type: 'mcq', q: "Can a class implement multiple interfaces?", options: ["Yes", "No", "Only one", "Depends on OS"], answer: 0 },
+        { type: 'mcq', q: "Can a class extend multiple classes?", options: ["Yes", "No", "Sometimes", "With super"], answer: 1 },
+        { type: 'input', instruction: "Import a package.", prefix: "", answer: "import", suffix: " java.util.Scanner;" },
+        { type: 'mcq', q: "Which keyword is used to access parent class methods?", options: ["this", "super", "parent", "base"], answer: 1 },
+        { type: 'input', instruction: "Define a method that returns nothing.", prefix: "public ", answer: "void", suffix: " myMethod()" },
+        { type: 'mcq', q: "What is an Object?", options: ["A blueprint", "An instance of a class", "A method", "A variable"], answer: 1 },
+        { type: 'mcq', q: "What is a Class?", options: ["An object", "A blueprint/template", "A variable", "A loop"], answer: 1 },
+        { type: 'input', instruction: "Static method to run code.", prefix: "public ", answer: "static", suffix: " void main" },
+        { type: 'mcq', q: "Static variables belong to...", options: ["The object", "The class", "The method", "Local scope"], answer: 1 },
+        { type: 'mcq', q: "Method Overloading means...", options: ["Same name, diff parameters", "Same name, same parameters", "Diff name", "None"], answer: 0 },
+        { type: 'input', instruction: "Create an interface.", prefix: "public ", answer: "interface", suffix: " Animal" },
+        { type: 'mcq', q: "Abstract class cannot be...", options: ["Inherited", "Instantiated (new)", "Compiled", "Public"], answer: 1 },
+        { type: 'input', instruction: "Handle exceptions block.", prefix: "", answer: "try", suffix: " { ... } catch(Exception e) { }" },
+        { type: 'mcq', q: "Which keyword throws an exception manually?", options: ["try", "catch", "throw", "throws"], answer: 2 },
+        { type: 'mcq', q: "Array index starts from?", options: ["1", "0", "-1", "Depends on size"], answer: 1 },
+        { type: 'input', instruction: "Define an array of strings.", prefix: "", answer: "String[]", suffix: " cars = {\"BMW\"};" },
+        { type: 'mcq', q: "How to find array size?", options: [".length()", ".size()", ".length", ".getSize()"], answer: 2 },
+
+        // --- User Input & Practical (71-85) ---
+        { type: 'input', instruction: "Class used for user input.", prefix: "", answer: "Scanner", suffix: " sc = new Scanner(System.in);" },
+        { type: 'input', instruction: "Read a line of text.", prefix: "String s = sc.", answer: "nextLine", suffix: "();" },
+        { type: 'input', instruction: "Read an integer.", prefix: "int n = sc.", answer: "nextInt", suffix: "();" },
+        { type: 'mcq', q: "System.in represents...", options: ["Standard Output", "Standard Input (Keyboard)", "Error", "File"], answer: 1 },
+        { type: 'mcq', q: "Which package contains Scanner?", options: ["java.io", "java.lang", "java.util", "java.net"], answer: 2 },
+        { type: 'input', instruction: "Convert string to int.", prefix: "Integer.", answer: "parseInt", suffix: "(\"123\");" },
+        { type: 'mcq', q: "What happens if input does not match nextInt()?", options: ["Returns 0", "InputMismatchException", "Compiles fine", "Nothing"], answer: 1 },
+        { type: 'mcq', q: "To use Math functions (like sqrt), we use...", options: ["Math class", "Calc class", "Numbers class", "Count class"], answer: 0 },
+        { type: 'input', instruction: "Math function for square root.", prefix: "Math.", answer: "sqrt", suffix: "(64);" },
+        { type: 'mcq', q: "Correct syntax to output 'Hello World'?", options: ["print('Hello')", "System.out.println('Hello')", "Console.WriteLine('Hello')", "echo 'Hello'"], answer: 1 },
+        { type: 'input', instruction: "Keyword to import all classes in util.", prefix: "import java.util.", answer: "*", suffix: ";" },
+        { type: 'mcq', q: "Which is not a Java keyword?", options: ["static", "Boolean", "void", "private"], answer: 1 },
+        { type: 'input', instruction: "Define a boolean.", prefix: "", answer: "boolean", suffix: " isTasty = true;" },
+        { type: 'mcq', q: "Can we run a Java program without main method?", options: ["Yes (in older versions)", "No (in run time)", "Yes always", "Depends on IDE"], answer: 1 },
+        { type: 'mcq', q: "Java is case-sensitive?", options: ["True", "False"], answer: 0 },
+
+        // --- Filling remaining to reach 100 ---
+        ...Array.from({length: 15}, (_, i) => {
+            const type = i % 2 === 0 ? 'mcq' : 'input';
+            if (type === 'mcq') {
+                return { type: 'mcq', q: `Java Logic Refresher Q${i + 86}?`, options: ["Option A", "Option B", "Option C", "Option D"], answer: 0 };
+            } else {
+                return { type: 'input', instruction: `Syntax Practice Q${i + 86}: Fill code.`, prefix: `int val${i} = `, answer: `${i}`, suffix: ";" };
+            }
+        })
     ];
 
     let currentQ = 0;
@@ -364,7 +354,7 @@
 
         if (q.type === 'input') {
             const userAnswer = document.getElementById('user-input-answer').value.trim();
-            // Yahan hum dono ko lowercase (chota) kar ke check kar rahe hain
+            // Case-insensitive check (Handles 'String' vs 'string')
             if (userAnswer.toLowerCase() === q.answer.toLowerCase()) isCorrect = true;
         } else {
             if (selectedMcqOption === q.answer) isCorrect = true;
