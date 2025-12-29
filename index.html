@@ -119,7 +119,7 @@
     <div class="card">
         <div class="card-header">
             <img src="FINAL_LOGO-removebg-preview.png" alt="TriCode Academy Logo" class="brand-logo">
-            <div class="brand-title">TriCode Academy & SOlutions</div>
+            <div class="brand-title">TriCode Academy</div>
             <div class="brand-subtitle">EDUCATION, TECHNOLOGY, INNOVATION</div>
         </div>
 
@@ -182,60 +182,121 @@
 <script>
     // 100 Questions Database (Mixed MCQ & Input)
     // Topics: C Syntax, History, Intro, Real Life, Data Types, Input, Variables, Constants
+    // 100 Questions Database covering all C Programming topics
     const questions = [
-        // C Intro, History, Syntax
-        { type: 'mcq', q: "Who developed the C programming language?", options: ["Dennis Ritchie", "Bjarne Stroustrup", "James Gosling", "Guido van Rossum"], answer: 0 },
-        { type: 'mcq', q: "C is what type of programming language?", options: ["Object-Oriented", "Procedural", "Functional", "Scripting"], answer: 1 },
-        { type: 'input', instruction: "All C programs must have this function to execute.", prefix: "int ", answer: "main", suffix: "() { ... }" },
-        { type: 'mcq', q: "Which character is used to end a statement in C?", options: [":", ".", ";", ","], answer: 2 },
-        { type: 'input', instruction: "Single-line comments in C start with.", prefix: "", answer: "//", suffix: " This is a comment" },
-        { type: 'mcq', q: "What is the purpose of #include <stdio.h>?", options: ["To include standard input/output library", "To define a constant", "To start the main function", "To declare variables"], answer: 0 },
-        { type: 'input', instruction: "Multi-line comments start with /* and end with.", prefix: "/* Comment */", answer: "*/", suffix: "" },
+        // --- History & Introduction (1-10) ---
+        { type: 'mcq', q: "Who is known as the father of C Programming?", options: ["James Gosling", "Dennis Ritchie", "Bjarne Stroustrup", "Bill Gates"], answer: 1 },
+        { type: 'mcq', q: "In which year was C developed?", options: ["1972", "1980", "1969", "1991"], answer: 0 },
+        { type: 'mcq', q: "Where was C developed?", options: ["Microsoft", "Apple", "Bell Labs", "IBM"], answer: 2 },
+        { type: 'mcq', q: "C is a successor of which language?", options: ["Java", "Python", "B Language", "C++"], answer: 2 },
+        { type: 'mcq', q: "Which Operating System is largely written in C?", options: ["Windows", "UNIX", "Android", "iOS"], answer: 1 },
+        { type: 'mcq', q: "C language is best suited for?", options: ["Web Development", "System Programming", "AI", "Mobile Apps"], answer: 1 },
+        { type: 'mcq', q: "Is C a case-sensitive language?", options: ["Yes", "No", "Depends on compiler", "Sometimes"], answer: 0 },
+        { type: 'mcq', q: "Which level of language is C?", options: ["Low Level", "High Level", "Middle Level", "Machine Level"], answer: 2 },
+        { type: 'input', instruction: "Standard extension for C files.", prefix: "filename", answer: ".c", suffix: "" },
+        { type: 'mcq', q: "Which is the first book on C?", options: ["The C Programming Language", "Head First C", "C for Dummies", "Learn C"], answer: 0 },
 
-        // Real Life & Variables/Rules
-        { type: 'mcq', q: "Which of these is a valid variable name?", options: ["2myVar", "my-Var", "_myVar", "float"], answer: 2 },
-        { type: 'mcq', q: "In a banking app, what data type would store a user's balance?", options: ["int", "char", "float", "void"], answer: 2 },
-        { type: 'input', instruction: "A variable name cannot start with a.", prefix: "", answer: "number", suffix: "" },
-        { type: 'mcq', q: "Which is NOT a valid variable name?", options: ["count", "total_sum", "break", "value1"], answer: 2 },
-        { type: 'input', instruction: "Variables are used to store.", prefix: "", answer: "data", suffix: "" },
-        { type: 'mcq', q: "A variable declared inside a function is called a?", options: ["Global variable", "Local variable", "Static variable", "Constant"], answer: 1 },
+        // --- Syntax & Structure (11-20) ---
+        { type: 'input', instruction: "Every C program execution starts from this function.", prefix: "", answer: "main", suffix: "() { }" },
+        { type: 'input', instruction: "Symbol used to terminate a statement.", prefix: "printf('Hi')", answer: ";", suffix: "" },
+        { type: 'input', instruction: "Include standard input output library.", prefix: "#include <", answer: "stdio.h", suffix: ">" },
+        { type: 'mcq', q: "Which brackets are used to define the body of a function?", options: ["( )", "[ ]", "{ }", "< >"], answer: 2 },
+        { type: 'input', instruction: "Single line comment starts with.", prefix: "", answer: "//", suffix: " comment" },
+        { type: 'input', instruction: "Multi-line comment ending symbol.", prefix: "/* comment ", answer: "*/", suffix: "" },
+        { type: 'mcq', q: "What does \\n do in C?", options: ["Beep sound", "New Line", "Tab space", "Backspace"], answer: 1 },
+        { type: 'mcq', q: "What does \\t do?", options: ["Vertical Tab", "Horizontal Tab", "New Line", "Alert"], answer: 1 },
+        { type: 'input', instruction: "Command to return success status from main.", prefix: "", answer: "return", suffix: " 0;" },
+        { type: 'mcq', q: "Compiler converts C code into?", options: ["Java Code", "Machine Code", "HTML", "Python"], answer: 1 },
 
-        // Data Types (int, float, double, char)
-        { type: 'input', instruction: "Create a variable to store a whole number.", prefix: "", answer: "int", suffix: " age = 25;" },
-        { type: 'mcq', q: "How many bytes does a 'char' typically occupy?", options: ["1", "2", "4", "8"], answer: 0 },
-        { type: 'input', instruction: "Create a variable for a decimal number.", prefix: "", answer: "float", suffix: " price = 9.99;" },
-        { type: 'mcq', q: "Which type has higher precision for decimal numbers?", options: ["float", "int", "double", "char"], answer: 2 },
-        { type: 'input', instruction: "Create a variable for a single character.", prefix: "", answer: "char", suffix: " grade = 'A';" },
-        { type: 'mcq', q: "What is the format specifier for a 'double'?", options: ["%d", "%f", "%lf", "%c"], answer: 2 },
-        { type: 'input', instruction: "Format specifier for a float.", prefix: "printf(\"%", answer: "f", suffix: "\", 3.14);" },
-        
-        // User Input (scanf, specifiers)
-        { type: 'input', instruction: "Function used to read formatted input.", prefix: "", answer: "scanf", suffix: "(\"%d\", &num);" },
-        { type: 'mcq', q: "What is the purpose of the '&' operator in scanf?", options: ["It's a logical AND", "It gives the address of the variable", "It's a bitwise AND", "It's optional"], answer: 1 },
-        { type: 'input', instruction: "Format specifier to read an integer.", prefix: "scanf(\"%", answer: "d", suffix: "\", &myInt);" },
-        { type: 'mcq', q: "Which format specifier is used for strings?", options: ["%c", "%d", "%s", "%f"], answer: 2 },
-        { type: 'input', instruction: "To read a float into 'pi'.", prefix: "scanf(\"%f\", ", answer: "&pi", suffix: ");" },
-        { type: 'mcq', q: "What happens if you forget the '&' in scanf for an integer?", options: ["It works normally", "It reads a string instead", "It causes a runtime error/crash", "It prints the value"], answer: 2 },
-        { type: 'input', instruction: "Function used to output formatted text.", prefix: "", answer: "printf", suffix: "(\"Hello\");" },
+        // --- Variables & Naming Rules (21-35) ---
+        { type: 'input', instruction: "Keyword to declare an integer variable.", prefix: "", answer: "int", suffix: " count = 10;" },
+        { type: 'mcq', q: "Which is a valid variable name?", options: ["1stvar", "var-name", "var_name", "$var"], answer: 2 },
+        { type: 'mcq', q: "Variable names cannot start with a?", options: ["Underscore", "Digit/Number", "Letter", "Capital Letter"], answer: 1 },
+        { type: 'mcq', q: "Which of these is NOT allowed in variable names?", options: ["Letters", "Digits", "Underscores", "Spaces"], answer: 3 },
+        { type: 'input', instruction: "Assign value 50 to variable x.", prefix: "x ", answer: "=", suffix: " 50;" },
+        { type: 'mcq', q: "If we declare 'int a;' what is the initial value?", options: ["0", "1", "Garbage Value", "Null"], answer: 2 },
+        { type: 'mcq', q: "Which keyword is used to rename data types?", options: ["typedef", "rename", "name", "type"], answer: 0 },
+        { type: 'mcq', q: "Can we use keywords as variable names?", options: ["Yes", "No", "Sometimes", "Only in main"], answer: 1 },
+        { type: 'input', instruction: "Declare multiple variables.", prefix: "int x", answer: ",", suffix: " y, z;" },
+        { type: 'mcq', q: "Which is valid?", options: ["int my num;", "int my-num;", "int my_num;", "int 1num;"], answer: 2 },
+        { type: 'mcq', q: "Variable scope declared inside a function is?", options: ["Global", "Local", "Universal", "External"], answer: 1 },
+        { type: 'mcq', q: "Global variables are declared?", options: ["Inside main", "Outside all functions", "Inside loop", "In header file"], answer: 1 },
+        { type: 'input', instruction: "Operator to get size of a variable.", prefix: "", answer: "sizeof", suffix: "(x);" },
+        { type: 'mcq', q: "Maximum length of a variable name in C standards?", options: ["8 chars", "31 chars", "255 chars", "Unlimited"], answer: 1 },
+        { type: 'mcq', q: "Are 'apple' and 'Apple' the same variable?", options: ["Yes", "No", "Depends on OS", "Same memory"], answer: 1 },
 
-        // Constants & Keywords
-        { type: 'input', instruction: "Keyword to declare a constant.", prefix: "", answer: "const", suffix: " int DAYS = 7;" },
-        { type: 'mcq', q: "Can the value of a constant be changed after declaration?", options: ["Yes", "No", "Only inside main", "Depends on the compiler"], answer: 1 },
-        { type: 'mcq', q: "Which of these is a reserved keyword in C?", options: ["variable", "integer", "return", "output"], answer: 2 },
-        { type: 'input', instruction: "Symbol used to define preprocessor constants.", prefix: "", answer: "#define", suffix: " PI 3.14159" },
-        { type: 'mcq', q: "Keywords in C are always written in?", options: ["Uppercase", "Lowercase", "CamelCase", "Any case"], answer: 1 },
-        
-        // ... (Continuing to 100 questions with more variations) ...
-        // For brevity, I will replicate the pattern to fill the list.
-        // In a real scenario, you would add unique questions here.
-        ...Array.from({length: 68}, (_, i) => {
-            const type = i % 2 === 0 ? 'mcq' : 'input';
-            if (type === 'mcq') {
-                return { type: 'mcq', q: `Logical/Practical MCQ Question ${i + 33}?`, options: ["Option A", "Option B", "Option C", "Option D"], answer: 0 };
-            } else {
-                return { type: 'input', instruction: `Practical Input Question ${i + 33}: Fill the code.`, prefix: `int var${i} = `, answer: `${i}`, suffix: ";" };
-            }
-        })
+        // --- Data Types (36-55) ---
+        { type: 'mcq', q: "Size of 'int' is usually?", options: ["1 byte", "2 or 4 bytes", "8 bytes", "10 bytes"], answer: 1 },
+        { type: 'mcq', q: "Size of 'char' is?", options: ["1 byte", "2 bytes", "4 bytes", "8 bytes"], answer: 0 },
+        { type: 'mcq', q: "Which data type stores decimal numbers?", options: ["int", "char", "float", "short"], answer: 2 },
+        { type: 'input', instruction: "Declare a character variable.", prefix: "", answer: "char", suffix: " letter = 'A';" },
+        { type: 'input', instruction: "Declare a double precision float.", prefix: "", answer: "double", suffix: " pi = 3.14159;" },
+        { type: 'mcq', q: "Range of 'unsigned char' is?", options: ["-128 to 127", "0 to 255", "0 to 65535", "-32768 to 32767"], answer: 1 },
+        { type: 'mcq', q: "Format specifier for int.", options: ["%f", "%c", "%d", "%s"], answer: 2 },
+        { type: 'mcq', q: "Format specifier for float.", options: ["%d", "%f", "%c", "%lf"], answer: 1 },
+        { type: 'mcq', q: "Format specifier for char.", options: ["%s", "%d", "%f", "%c"], answer: 3 },
+        { type: 'mcq', q: "Which type is used for TRUE/FALSE in C99?", options: ["bool", "boolean", "int", "logic"], answer: 0 },
+        { type: 'input', instruction: "Specifier for double.", prefix: "printf(\"%", answer: "lf", suffix: "\", myDouble);" },
+        { type: 'input', instruction: "Specifier for string.", prefix: "printf(\"%", answer: "s", suffix: "\", \"Hello\");" },
+        { type: 'mcq', q: "What is the default return type of main?", options: ["void", "int", "float", "char"], answer: 1 },
+        { type: 'mcq', q: "Which is a valid float constant?", options: ["3.14", "3,14", "3;14", "3-14"], answer: 0 },
+        { type: 'mcq', q: "String is an array of?", options: ["Integers", "Floats", "Characters", "Booleans"], answer: 2 },
+        { type: 'mcq', q: "ASCII value of 'A' is?", options: ["65", "97", "48", "1"], answer: 0 },
+        { type: 'mcq', q: "ASCII value of 'a' is?", options: ["65", "97", "100", "50"], answer: 1 },
+        { type: 'input', instruction: "Type casting float to int.", prefix: "(", answer: "int", suffix: ") 3.14" },
+        { type: 'mcq', q: "Keyword 'void' means?", options: ["Returns 0", "Returns Nothing", "Returns Error", "Returns 1"], answer: 1 },
+        { type: 'mcq', q: "Which consumes more memory?", options: ["int", "char", "double", "float"], answer: 2 },
+
+        // --- User Input (56-70) ---
+        { type: 'input', instruction: "Function to take user input.", prefix: "", answer: "scanf", suffix: "(\"%d\", &a);" },
+        { type: 'mcq', q: "What symbol is used with variable name in scanf?", options: ["*", "#", "&", "@"], answer: 2 },
+        { type: 'input', instruction: "Read an integer into x.", prefix: "scanf(\"%d\", ", answer: "&x", suffix: ");" },
+        { type: 'mcq', q: "Why do we use '&' in scanf?", options: ["To access value", "To access address", "To print value", "To add value"], answer: 1 },
+        { type: 'input', instruction: "Function to print text.", prefix: "", answer: "printf", suffix: "(\"Hello\");" },
+        { type: 'mcq', q: "scanf() stops reading a string at?", options: ["Enter", "Space", "Tab", "All of these"], answer: 3 },
+        { type: 'mcq', q: "Which header file is required for printf/scanf?", options: ["conio.h", "stdio.h", "math.h", "stdlib.h"], answer: 1 },
+        { type: 'input', instruction: "Read a character.", prefix: "scanf(\"%", answer: "c", suffix: "\", &ch);" },
+        { type: 'mcq', q: "getch() is part of which header?", options: ["stdio.h", "conio.h", "string.h", "ctype.h"], answer: 1 },
+        { type: 'mcq', q: "Return type of scanf function is?", options: ["void", "char", "int (number of inputs)", "float"], answer: 2 },
+        { type: 'mcq', q: "How to read a full line of text including spaces?", options: ["scanf", "gets", "print", "read"], answer: 1 },
+        { type: 'input', instruction: "Read two integers.", prefix: "scanf(\"%d %d\", &a,", answer: "&b", suffix: ");" },
+        { type: 'mcq', q: "If input is 'A' and format is %d, what happens?", options: ["Reads ASCII", "Reads A", "Error/Garbage", "Reads 0"], answer: 2 },
+        { type: 'mcq', q: "Does printf require '&' symbol?", options: ["Yes", "No", "Sometimes", "Always"], answer: 1 },
+        { type: 'input', instruction: "Output a variable value.", prefix: "printf(\"Value: %d\", ", answer: "a", suffix: ");" },
+
+        // --- Constants & Operators (71-85) ---
+        { type: 'input', instruction: "Keyword to make a variable unchangeable.", prefix: "", answer: "const", suffix: " int MAX = 100;" },
+        { type: 'mcq', q: "Value of a const variable...", options: ["Can change", "Cannot change", "Changes at runtime", "Is random"], answer: 1 },
+        { type: 'input', instruction: "Define a constant macro.", prefix: "", answer: "#define", suffix: " PI 3.14" },
+        { type: 'mcq', q: "Which operator is used for Modulus (Remainder)?", options: ["/", "%", "*", "#"], answer: 1 },
+        { type: 'input', instruction: "Increment operator.", prefix: "i", answer: "++", suffix: ";" },
+        { type: 'input', instruction: "Decrement operator.", prefix: "i", answer: "--", suffix: ";" },
+        { type: 'mcq', q: "What is 10 % 3?", options: ["3", "1", "3.33", "0"], answer: 1 },
+        { type: 'mcq', q: "Which is the 'Equal to' comparison operator?", options: ["=", "==", "===", "!="], answer: 1 },
+        { type: 'mcq', q: "Which is the 'Logical AND' operator?", options: ["&", "&&", "||", "!"], answer: 1 },
+        { type: 'mcq', q: "Which is the 'Logical OR' operator?", options: ["&", "&&", "||", "!"], answer: 2 },
+        { type: 'input', instruction: "Not Equal operator.", prefix: "if (a ", answer: "!=", suffix: " b)" },
+        { type: 'mcq', q: "Result of 5 / 2 in integer arithmetic?", options: ["2.5", "2", "3", "Error"], answer: 1 },
+        { type: 'mcq', q: "Operator priority: Which is highest?", options: ["+", "=", "*", "-"], answer: 2 },
+        { type: 'mcq', q: "What is the assignment operator?", options: ["==", "->", "=", "::"], answer: 2 },
+        { type: 'input', instruction: "Add and assign operator.", prefix: "x ", answer: "+=", suffix: " 5;" },
+
+        // --- Real World & Practical Scenarios (86-100) ---
+        { type: 'mcq', q: "To store a person's age, which is best?", options: ["float", "char", "int", "double"], answer: 2 },
+        { type: 'mcq', q: "To store the price of a product (e.g., 10.50)?", options: ["int", "float", "char", "void"], answer: 1 },
+        { type: 'mcq', q: "To store your name?", options: ["char", "int", "String (char array)", "float"], answer: 2 },
+        { type: 'mcq', q: "To create a loop that runs forever?", options: ["for(;;)", "loop()", "repeat()", "wait()"], answer: 0 },
+        { type: 'mcq', q: "Which year is C standard C99 from?", options: ["1990", "1999", "1989", "2011"], answer: 1 },
+        { type: 'mcq', q: "Can we compile C code on Linux?", options: ["Yes", "No", "Only Windows", "Only Mac"], answer: 0 },
+        { type: 'mcq', q: "Popular compiler for C is?", options: ["GCC", "JRE", "V8", "JVM"], answer: 0 },
+        { type: 'input', instruction: "Escape character for double quote.", prefix: "printf(\"", answer: "\\\"", suffix: "Hello\");" },
+        { type: 'mcq', q: "If 'int a = 10', what is 'a++' value immediately?", options: ["10 (then becomes 11)", "11", "12", "9"], answer: 0 },
+        { type: 'mcq', q: "If 'int a = 10', what is '++a' value immediately?", options: ["10", "11", "12", "9"], answer: 1 },
+        { type: 'mcq', q: "What is a 'syntax error'?", options: ["Logical mistake", "Typing/Grammar mistake", "Runtime crash", "OS error"], answer: 1 },
+        { type: 'mcq', q: "Which is used to make decisions?", options: ["if-else", "loop", "struct", "header"], answer: 0 },
+        { type: 'mcq', q: "Correct way to write main?", options: ["void main()", "int main()", "Both are used", "None"], answer: 2 },
+        { type: 'input', instruction: "Statement to stop a loop.", prefix: "", answer: "break", suffix: ";" },
+        { type: 'mcq', q: "TriCode Academy teaches C because?", options: ["It is the base of languages", "It is easy", "It is old", "No reason"], answer: 0 }
     ];
 
     let currentQ = 0;
@@ -303,7 +364,8 @@
 
         if (q.type === 'input') {
             const userAnswer = document.getElementById('user-input-answer').value.trim();
-            if (userAnswer === q.answer) isCorrect = true;
+            // Yahan hum dono ko lowercase (chota) kar ke check kar rahe hain
+            if (userAnswer.toLowerCase() === q.answer.toLowerCase()) isCorrect = true;
         } else {
             if (selectedMcqOption === q.answer) isCorrect = true;
         }
@@ -332,5 +394,4 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
