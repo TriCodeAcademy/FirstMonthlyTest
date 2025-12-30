@@ -3,113 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TriCode Academy - Java Core Test</title>
+    <title>TriCode Academy - Java Assessment</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #ffffff;
+            background-color: #f8f9fa;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #004a99; /* TriCode Blue */
+            color: #004a99;
+            user-select: none;
         }
         .container {
             max-width: 800px;
-            margin-top: 40px;
+            margin-top: 30px;
+            margin-bottom: 50px;
         }
         .card {
             border: none;
             border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
             overflow: hidden;
             background-color: #ffffff;
         }
         .card-header {
             background-color: #ffffff;
             color: #004a99;
-            padding: 25px;
+            padding: 20px;
             text-align: center;
-            border-bottom: 2px solid #00a2ff;
+            border-bottom: 3px solid #00a2ff;
         }
         .brand-logo {
-            width: 100px;
+            width: 90px;
             height: auto;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
         .brand-title {
-            font-size: 28px;
-            font-weight: 700;
-            letter-spacing: 1px;
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
         }
         .brand-subtitle {
-            font-size: 14px;
-            opacity: 0.8;
+            font-size: 13px;
+            opacity: 0.7;
             text-transform: uppercase;
             letter-spacing: 2px;
+            font-weight: 600;
+        }
+        .timer-box {
+            font-size: 22px;
+            font-weight: bold;
+            color: #d63384;
+            background: #fff0f6;
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: 2px solid #d63384;
+            display: inline-block;
+            min-width: 120px;
+            text-align: center;
         }
         .question-box {
-            background-color: #f0f8ff;
+            background-color: #eaf6ff;
             color: #004a99;
-            padding: 20px;
-            border-radius: 8px;
+            padding: 25px;
+            border-radius: 10px;
             font-family: 'Courier New', Courier, monospace;
-            font-size: 18px;
+            font-size: 19px;
             margin: 20px 0;
-            border-left: 5px solid #00a2ff;
+            border-left: 6px solid #00a2ff;
+            line-height: 1.6;
         }
         .code-input {
             border: none;
             border-bottom: 2px solid #004a99;
             background: transparent;
-            color: #d63384; /* Pinkish color for Java input to stand out */
-            width: 130px;
+            color: #d63384;
+            width: 140px;
             text-align: center;
             font-weight: bold;
             outline: none;
             padding: 0 5px;
+            font-size: 19px;
         }
         .code-input:focus {
-            border-bottom-color: #00a2ff;
-            background-color: rgba(0, 74, 153, 0.1);
+            border-bottom-color: #d63384;
+            background-color: rgba(214, 51, 132, 0.05);
         }
         .btn-option {
             width: 100%;
             text-align: left;
-            margin-bottom: 10px;
-            padding: 15px;
-            border: 1px solid #ced4da;
+            margin-bottom: 12px;
+            padding: 16px;
+            border: 2px solid #e9ecef;
             background-color: white;
-            color: #004a99;
-            transition: all 0.3s;
+            color: #495057;
+            transition: all 0.2s;
+            border-radius: 8px;
+            font-weight: 500;
         }
         .btn-option:hover {
-            background-color: #e9ecef;
+            background-color: #f1f3f5;
             border-color: #00a2ff;
         }
         .btn-option.selected {
             background-color: #00a2ff;
             color: white;
             border-color: #00a2ff;
-        }
-        .btn-primary {
-            background-color: #004a99;
-            border-color: #004a99;
-        }
-        .btn-primary:hover {
-            background-color: #003366;
-            border-color: #003366;
+            box-shadow: 0 4px 10px rgba(0, 162, 255, 0.3);
         }
         .score-circle {
-            width: 150px;
-            height: 150px;
-            background: #00a2ff;
+            width: 160px;
+            height: 160px;
+            background: linear-gradient(135deg, #00a2ff, #004a99);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 40px;
+            font-size: 48px;
             font-weight: bold;
             margin: 0 auto;
-            box-shadow: 0 4px 15px rgba(0, 162, 255, 0.4);
+            box-shadow: 0 10px 25px rgba(0, 74, 153, 0.3);
+        }
+        #quiz-screen, #result-screen { display: none; }
+        
+        .review-card {
+            border-left: 5px solid #ccc;
+            background: #fff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            text-align: left;
+        }
+        .review-correct {
+            border-left-color: #198754;
+            background-color: #f0fff4;
+        }
+        .review-wrong {
+            border-left-color: #dc3545;
+            background-color: #fff5f5;
+        }
+        .ans-label {
+            font-weight: bold;
+            font-size: 14px;
+        }
+        /* Buttons container */
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
         }
     </style>
 </head>
@@ -118,40 +159,55 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <img src="FINAL_LOGO-removebg-preview.png" alt="TriCode Academy Logo" class="brand-logo">
+            <img src="FINAL_LOGO-removebg-preview.png" alt="TriCode Logo" class="brand-logo">
             <div class="brand-title">TriCode Academy</div>
             <div class="brand-subtitle">EDUCATION, TECHNOLOGY, INNOVATION</div>
         </div>
 
-        <div class="card-body p-4">
+        <div class="card-body p-4 p-md-5">
             
             <div id="start-screen">
-                <h4 class="text-center mb-4">First Monthly Test (Java Core)</h4>
+                <h3 class="text-center mb-4 fw-bold">Java Core Monthly Test</h3>
                 <div class="mb-4">
-                    <label class="form-label">Student Name</label>
-                    <input type="text" id="studentName" class="form-control form-control-lg" placeholder="Enter your name...">
-                    <small class="text-danger" id="name-error" style="display:none;">Name is required.</small>
+                    <label class="form-label fw-bold">Student Full Name</label>
+                    <input type="text" id="studentName" class="form-control form-control-lg" placeholder="Enter your full name...">
+                    <small class="text-danger mt-2 d-block" id="name-error" style="display:none;">Please enter your name to start.</small>
                 </div>
-                <div class="alert alert-light border">
-                    <strong>Instructions:</strong><br>
-                    • Total Questions: 100<br>
-                    • Topics: Variables, OOP Basics, Loops, If/Else, Scanner, Access Modifiers.<br>
-                    • Format: MCQ & Code Completion (Fill in the blanks).
+                
+                <div class="card bg-light border-0 mb-4">
+                    <div class="card-body">
+                        <h6 class="fw-bold mb-3">Test Details:</h6>
+                        <ul class="mb-0 text-muted">
+                            <li class="mb-2"><strong>Time Limit:</strong> 60 Minutes (Auto-submit)</li>
+                            <li class="mb-2"><strong>Total Questions:</strong> 40</li>
+                            <li class="mb-2"><strong>Format:</strong> You can review and change answers using Previous/Next buttons.</li>
+                        </ul>
+                    </div>
                 </div>
-                <button class="btn btn-primary btn-lg w-100" onclick="startTest()">Start Test</button>
+
+                <button class="btn btn-primary btn-lg w-100 py-3 fw-bold" onclick="startTest()">START TEST NOW</button>
             </div>
 
-            <div id="quiz-screen" style="display:none;">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="">Question <span id="q-current">1</span> / 100</span>
-                    <span class="badge bg-light text-dark border" id="display-name">User</span>
+            <div id="quiz-screen">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                        <span class="text-muted small">Question</span>
+                        <h4 class="mb-0"><span id="q-current">1</span> / 40</h4>
+                    </div>
+                    <div class="timer-box">
+                        <span id="timer-display">60:00</span>
+                    </div>
                 </div>
 
-                <h5 id="q-instruction" class="mb-3"></h5>
+                <div class="mb-3 text-end">
+                    <span class="badge bg-light text-dark border px-3 py-2" id="display-name">User</span>
+                </div>
+
+                <h5 id="q-instruction" class="mb-3 fw-bold"></h5>
                 
                 <div id="input-question-area" class="question-box" style="display: none;">
                     <span id="code-prefix"></span>
-                    <input type="text" class="code-input" id="user-input-answer" autocomplete="off">
+                    <input type="text" class="code-input" id="user-input-answer" autocomplete="off" spellcheck="false" oninput="saveCurrentAnswer()">
                     <span id="code-suffix"></span>
                 </div>
 
@@ -159,21 +215,32 @@
                     <div id="options-container"></div>
                 </div>
 
-                <button class="btn btn-primary w-100 py-3 mt-4" onclick="submitAnswer()">Next Question &rarr;</button>
+                <div class="nav-buttons">
+                    <button class="btn btn-outline-secondary w-50 py-3 fw-bold" id="prev-btn" onclick="prevQuestion()" disabled>&larr; Previous</button>
+                    <button class="btn btn-primary w-50 py-3 fw-bold" id="next-btn" onclick="nextQuestion()">Next Question &rarr;</button>
+                </div>
             </div>
 
-            <div id="result-screen" style="display:none; text-align: center;">
-                <h3 class="mb-4">Test Completed!</h3>
-                <p class="">Student: <span id="final-name" class="fw-bold"></span></p>
+            <div id="result-screen" class="text-center">
+                <h2 class="mb-4 fw-bold">Test Submitted!</h2>
+                
+                <div class="alert alert-success d-inline-block px-4 py-2 mb-4">
+                    Student: <span id="final-name" class="fw-bold"></span>
+                </div>
                 
                 <div class="score-circle mb-4">
                     <span id="final-score">0</span>%
                 </div>
 
-                <h5 id="result-message" class="fw-bold" style="color: #004a99;">Great effort! Keep coding in Java.</h5>
-                <p class="small mt-2">Correct Answers: <span id="correct-count">0</span> / 100</p>
+                <h4 id="result-message" class="fw-bold text-primary mb-2">Great Job!</h4>
+                <p class="text-muted">You scored <span id="correct-count" class="fw-bold text-dark">0</span> out of 40</p>
                 
-                <button class="btn btn-outline-primary mt-4" onclick="location.reload()">Try Again</button>
+                <button class="btn btn-outline-dark mt-2 mb-4" onclick="location.reload()">Back to Home</button>
+                
+                <hr>
+                
+                <h4 class="text-start mt-4 mb-3 fw-bold">Detailed Report</h4>
+                <div id="review-container"></div>
             </div>
 
         </div>
@@ -181,119 +248,71 @@
 </div>
 
 <script>
-    // 100 Questions Database covering Java Core Topics
+    // --- CONFIGURATION ---
+    const TOTAL_TIME_MINUTES = 60;
+    
+    // --- 40 QUESTIONS DATABASE ---
     const questions = [
-        // --- Intro & History (1-10) ---
-        { type: 'mcq', q: "Who developed Java?", options: ["Dennis Ritchie", "James Gosling", "Guido van Rossum", "Bjarne Stroustrup"], answer: 1 },
-        { type: 'mcq', q: "What was the original name of Java?", options: ["Oak", "C+++", "Pine", "Latte"], answer: 0 },
-        { type: 'input', instruction: "Java source code is saved with this extension.", prefix: "filename", answer: ".java", suffix: "" },
-        { type: 'mcq', q: "Java is...", options: ["Platform Dependent", "Platform Independent", "Machine Dependent", "None"], answer: 1 },
-        { type: 'mcq', q: "What translates Java source code into Bytecode?", options: ["Interpreter", "Compiler (javac)", "JVM", "JRE"], answer: 1 },
-        { type: 'mcq', q: "What executes the Bytecode?", options: ["JDK", "JVM", "IDE", "API"], answer: 1 },
-        { type: 'input', instruction: "Write the compiler command.", prefix: "", answer: "javac", suffix: " MyFile.java" },
-        { type: 'mcq', q: "What does WORA stand for?", options: ["Write Once Run Anywhere", "Write One Read All", "Work On Real Apps", "None"], answer: 0 },
-        { type: 'input', instruction: "Main entry point method name.", prefix: "public static void", answer: "main", suffix: "(String[] args)" },
-        { type: 'mcq', q: "Which company currently owns Java?", options: ["Sun Microsystems", "Microsoft", "Oracle", "Google"], answer: 2 },
-
-        // --- Variables & Data Types (11-25) ---
-        { type: 'input', instruction: "Keyword to define an integer.", prefix: "", answer: "int", suffix: " x = 5;" },
-        { type: 'input', instruction: "Keyword for True/False values.", prefix: "", answer: "boolean", suffix: " isJavaFun = true;" },
-        { type: 'mcq', q: "Which data type stores decimals?", options: ["int", "double", "char", "String"], answer: 1 },
-        { type: 'input', instruction: "Class used to store text.", prefix: "", answer: "String", suffix: " name = \"TriCode\";" },
-        { type: 'mcq', q: "Size of an 'int' in Java?", options: ["2 bytes", "4 bytes", "8 bytes", "16 bytes"], answer: 1 },
-        { type: 'input', instruction: "Keyword to make a variable constant (unchangeable).", prefix: "", answer: "final", suffix: " int MAX = 100;" },
-        { type: 'mcq', q: "Which is a primitive data type?", options: ["String", "ArrayList", "char", "Scanner"], answer: 2 },
-        { type: 'input', instruction: "Define a single character.", prefix: "char grade =", answer: "'A'", suffix: ";" },
-        { type: 'mcq', q: "Default value of an int variable?", options: ["null", "0", "1", "undefined"], answer: 1 },
-        { type: 'input', instruction: "Declare a floating point number.", prefix: "", answer: "float", suffix: " myNum = 5.75f;" },
-        { type: 'mcq', q: "Can a boolean variable store 1 or 0?", options: ["Yes", "No", "Depends on OS", "Only 1"], answer: 1 },
-        { type: 'mcq', q: "Which is a valid variable name?", options: ["1stName", "_name", "class", "void"], answer: 1 },
-        { type: 'input', instruction: "Concatenate strings operator.", prefix: "String s = \"Hi\" ", answer: "+", suffix: " \" World\";" },
-        { type: 'mcq', q: "String is a...", options: ["Primitive type", "Wrapper class", "Object/Class", "None"], answer: 2 },
-        { type: 'input', instruction: "Get length of string.", prefix: "txt.", answer: "length", suffix: "();" },
-
-        // --- Operators & Control Flow (26-45) ---
-        { type: 'input', instruction: "Logical AND operator.", prefix: "if (x > 5 ", answer: "&&", suffix: " x < 10)" },
-        { type: 'input', instruction: "Logical OR operator.", prefix: "if (x == 5 ", answer: "||", suffix: " y == 5)" },
-        { type: 'mcq', q: "What is 10 % 3 in Java?", options: ["3", "1", "3.33", "10"], answer: 1 },
-        { type: 'input', instruction: "Equality operator.", prefix: "if (x ", answer: "==", suffix: " y)" },
-        { type: 'input', instruction: "Not Equal operator.", prefix: "if (x ", answer: "!=", suffix: " y)" },
-        { type: 'mcq', q: "Which statement is used to test multiple conditions?", options: ["if-else-if", "for loop", "class", "import"], answer: 0 },
-        { type: 'input', instruction: "Switch statement keyword.", prefix: "", answer: "switch", suffix: "(expression) { ... }" },
-        { type: 'input', instruction: "Keyword to stop a loop.", prefix: "", answer: "break", suffix: ";" },
-        { type: 'input', instruction: "Keyword to skip iteration.", prefix: "", answer: "continue", suffix: ";" },
-        { type: 'mcq', q: "Which loop is best when number of iterations is known?", options: ["while", "do-while", "for", "if"], answer: 2 },
-        { type: 'input', instruction: "Start a for loop.", prefix: "", answer: "for", suffix: "(int i=0; i<5; i++)" },
-        { type: 'mcq', q: "A 'do-while' loop runs at least...", options: ["0 times", "1 time", "2 times", "Infinite times"], answer: 1 },
-        { type: 'input', instruction: "Increment operator.", prefix: "i", answer: "++", suffix: ";" },
-        { type: 'mcq', q: "Operator precedence: Which is highest?", options: ["+", "*", "()", "-"], answer: 2 },
-        { type: 'input', instruction: "Assignment operator.", prefix: "int x ", answer: "=", suffix: " 10;" },
-        { type: 'mcq', q: "Result of '5' + 5 in Java?", options: ["10", "55", "Error", "50"], answer: 1 },
-        { type: 'input', instruction: "Ternary operator symbol.", prefix: "variable = (condition) ", answer: "?", suffix: " expressionTrue : expressionFalse;" },
-        { type: 'mcq', q: "Which keyword creates a subclass?", options: ["implements", "extends", "super", "this"], answer: 1 },
-        { type: 'input', instruction: "Print text to console.", prefix: "System.out.", answer: "println", suffix: "(\"Hello\");" },
-        { type: 'mcq', q: "In System.out.println, what is 'System'?", options: ["Method", "Variable", "Class", "Package"], answer: 2 },
-
-        // --- OOP & Keywords (46-70) ---
-        { type: 'input', instruction: "Keyword to define a class.", prefix: "", answer: "class", suffix: " MyClass { }" },
-        { type: 'input', instruction: "Keyword to create an object.", prefix: "MyClass obj = ", answer: "new", suffix: " MyClass();" },
-        { type: 'mcq', q: "Access modifier accessible only within the same class?", options: ["public", "private", "protected", "default"], answer: 1 },
-        { type: 'mcq', q: "Access modifier accessible everywhere?", options: ["public", "private", "protected", "default"], answer: 0 },
-        { type: 'input', instruction: "Reference to the current object.", prefix: "", answer: "this", suffix: ".x = x;" },
-        { type: 'mcq', q: "Which method is called when an object is created?", options: ["main", "constructor", "class", "void"], answer: 1 },
-        { type: 'input', instruction: "Keyword for inheritance.", prefix: "class Car ", answer: "extends", suffix: " Vehicle" },
-        { type: 'input', instruction: "Return value from a method.", prefix: "", answer: "return", suffix: " sum;" },
-        { type: 'mcq', q: "Can a class implement multiple interfaces?", options: ["Yes", "No", "Only one", "Depends on OS"], answer: 0 },
-        { type: 'mcq', q: "Can a class extend multiple classes?", options: ["Yes", "No", "Sometimes", "With super"], answer: 1 },
-        { type: 'input', instruction: "Import a package.", prefix: "", answer: "import", suffix: " java.util.Scanner;" },
-        { type: 'mcq', q: "Which keyword is used to access parent class methods?", options: ["this", "super", "parent", "base"], answer: 1 },
-        { type: 'input', instruction: "Define a method that returns nothing.", prefix: "public ", answer: "void", suffix: " myMethod()" },
-        { type: 'mcq', q: "What is an Object?", options: ["A blueprint", "An instance of a class", "A method", "A variable"], answer: 1 },
-        { type: 'mcq', q: "What is a Class?", options: ["An object", "A blueprint/template", "A variable", "A loop"], answer: 1 },
-        { type: 'input', instruction: "Static method to run code.", prefix: "public ", answer: "static", suffix: " void main" },
-        { type: 'mcq', q: "Static variables belong to...", options: ["The object", "The class", "The method", "Local scope"], answer: 1 },
-        { type: 'mcq', q: "Method Overloading means...", options: ["Same name, diff parameters", "Same name, same parameters", "Diff name", "None"], answer: 0 },
-        { type: 'input', instruction: "Create an interface.", prefix: "public ", answer: "interface", suffix: " Animal" },
-        { type: 'mcq', q: "Abstract class cannot be...", options: ["Inherited", "Instantiated (new)", "Compiled", "Public"], answer: 1 },
-        { type: 'input', instruction: "Handle exceptions block.", prefix: "", answer: "try", suffix: " { ... } catch(Exception e) { }" },
-        { type: 'mcq', q: "Which keyword throws an exception manually?", options: ["try", "catch", "throw", "throws"], answer: 2 },
-        { type: 'mcq', q: "Array index starts from?", options: ["1", "0", "-1", "Depends on size"], answer: 1 },
-        { type: 'input', instruction: "Define an array of strings.", prefix: "", answer: "String[]", suffix: " cars = {\"BMW\"};" },
-        { type: 'mcq', q: "How to find array size?", options: [".length()", ".size()", ".length", ".getSize()"], answer: 2 },
-
-        // --- User Input & Practical (71-85) ---
-        { type: 'input', instruction: "Class used for user input.", prefix: "", answer: "Scanner", suffix: " sc = new Scanner(System.in);" },
-        { type: 'input', instruction: "Read a line of text.", prefix: "String s = sc.", answer: "nextLine", suffix: "();" },
-        { type: 'input', instruction: "Read an integer.", prefix: "int n = sc.", answer: "nextInt", suffix: "();" },
-        { type: 'mcq', q: "System.in represents...", options: ["Standard Output", "Standard Input (Keyboard)", "Error", "File"], answer: 1 },
-        { type: 'mcq', q: "Which package contains Scanner?", options: ["java.io", "java.lang", "java.util", "java.net"], answer: 2 },
-        { type: 'input', instruction: "Convert string to int.", prefix: "Integer.", answer: "parseInt", suffix: "(\"123\");" },
-        { type: 'mcq', q: "What happens if input does not match nextInt()?", options: ["Returns 0", "InputMismatchException", "Compiles fine", "Nothing"], answer: 1 },
-        { type: 'mcq', q: "To use Math functions (like sqrt), we use...", options: ["Math class", "Calc class", "Numbers class", "Count class"], answer: 0 },
-        { type: 'input', instruction: "Math function for square root.", prefix: "Math.", answer: "sqrt", suffix: "(64);" },
-        { type: 'mcq', q: "Correct syntax to output 'Hello World'?", options: ["print('Hello')", "System.out.println('Hello')", "Console.WriteLine('Hello')", "echo 'Hello'"], answer: 1 },
-        { type: 'input', instruction: "Keyword to import all classes in util.", prefix: "import java.util.", answer: "*", suffix: ";" },
-        { type: 'mcq', q: "Which is not a Java keyword?", options: ["static", "Boolean", "void", "private"], answer: 1 },
-        { type: 'input', instruction: "Define a boolean.", prefix: "", answer: "boolean", suffix: " isTasty = true;" },
-        { type: 'mcq', q: "Can we run a Java program without main method?", options: ["Yes (in older versions)", "No (in run time)", "Yes always", "Depends on IDE"], answer: 1 },
-        { type: 'mcq', q: "Java is case-sensitive?", options: ["True", "False"], answer: 0 },
-
-        // --- Filling remaining to reach 100 ---
-        ...Array.from({length: 15}, (_, i) => {
-            const type = i % 2 === 0 ? 'mcq' : 'input';
-            if (type === 'mcq') {
-                return { type: 'mcq', q: `Java Logic Refresher Q${i + 86}?`, options: ["Option A", "Option B", "Option C", "Option D"], answer: 0 };
-            } else {
-                return { type: 'input', instruction: `Syntax Practice Q${i + 86}: Fill code.`, prefix: `int val${i} = `, answer: `${i}`, suffix: ";" };
-            }
-        })
+        // Variables & Data Types
+        { type: 'input', instruction: "Keyword to declare an integer variable.", prefix: "", answer: "int", suffix: " count = 10;" },
+        { type: 'mcq', q: "Which data type is used to create a variable that should store text?", options: ["String", "string", "Txt", "char"], answer: 0 },
+        { type: 'input', instruction: "Define a boolean variable.", prefix: "", answer: "boolean", suffix: " isJavaFun = true;" },
+        { type: 'mcq', q: "How many bytes does a 'double' take in Java?", options: ["4", "8", "2", "16"], answer: 1 },
+        { type: 'input', instruction: "Keyword to make a variable constant.", prefix: "", answer: "final", suffix: " int MAX_SPEED = 100;" },
+        { type: 'mcq', q: "Which of these is NOT a primitive data type?", options: ["int", "float", "boolean", "String"], answer: 3 },
+        { type: 'input', instruction: "Declare a floating point number.", prefix: "", answer: "float", suffix: " price = 19.99f;" },
+        // Operators
+        { type: 'mcq', q: "Which operator is used to compare two values?", options: ["=", "==", "<>", "><"], answer: 1 },
+        { type: 'input', instruction: "Logical AND operator symbol.", prefix: "if (x > 5 ", answer: "&&", suffix: " x < 10)" },
+        { type: 'input', instruction: "Modulus operator (Returns remainder).", prefix: "int rem = 10 ", answer: "%", suffix: " 3;" },
+        { type: 'mcq', q: "What is the result of: 10 + \"20\"?", options: ["30", "\"1020\"", "Error", "10"], answer: 1 },
+        { type: 'input', instruction: "Increment variable val by 1.", prefix: "val", answer: "++", suffix: ";" },
+        { type: 'mcq', q: "Which operator has the highest precedence?", options: ["+", "*", "=", "&&"], answer: 1 },
+        // Loops
+        { type: 'mcq', q: "Which loop is best to use when the number of iterations is known?", options: ["while", "for", "do-while", "foreach"], answer: 1 },
+        { type: 'input', instruction: "Start a standard for loop.", prefix: "", answer: "for", suffix: "(int i = 0; i < 5; i++)" },
+        { type: 'mcq', q: "A do-while loop is guaranteed to run at least how many times?", options: ["0", "1", "Infinite", "Depends on condition"], answer: 1 },
+        { type: 'input', instruction: "Keyword to stop a loop immediately.", prefix: "", answer: "break", suffix: ";" },
+        { type: 'input', instruction: "Keyword to skip the current iteration.", prefix: "", answer: "continue", suffix: ";" },
+        { type: 'mcq', q: "Is 'foreach' a valid keyword in Java?", options: ["Yes", "No (we use enhanced for)", "Only in Java 5", "None"], answer: 1 },
+        // Keywords & Basics
+        { type: 'mcq', q: "Which keyword is used to create a class?", options: ["class", "Class", "struct", "object"], answer: 0 },
+        { type: 'input', instruction: "Keyword to return a value from a method.", prefix: "", answer: "return", suffix: " result;" },
+        { type: 'mcq', q: "Can we use 'int' as a variable name?", options: ["Yes", "No", "Sometimes", "Only in main"], answer: 1 },
+        { type: 'input', instruction: "Keyword to reference the current object.", prefix: "", answer: "this", suffix: ".name = name;" },
+        { type: 'input', instruction: "Keyword to create a new object instance.", prefix: "Car myCar = ", answer: "new", suffix: " Car();" },
+        { type: 'mcq', q: "Which keyword creates a subclass (Inheritance)?", options: ["implements", "extends", "inherits", "super"], answer: 1 },
+        { type: 'input', instruction: "Used to access parent class methods.", prefix: "", answer: "super", suffix: ".display();" },
+        // Access Modifiers
+        { type: 'mcq', q: "Which access modifier makes code accessible ONLY within the same class?", options: ["public", "protected", "private", "default"], answer: 2 },
+        { type: 'mcq', q: "Which access modifier makes code accessible for all classes?", options: ["public", "private", "protected", "default"], answer: 0 },
+        { type: 'mcq', q: "If no modifier is specified, it is...", options: ["public", "private", "Default (Package-Private)", "protected"], answer: 2 },
+        { type: 'true_false', q: "Protected members are accessible in subclasses.", options: ["True", "False"], answer: 0 },
+        { type: 'input', instruction: "Define a public method.", prefix: "", answer: "public", suffix: " void myMethod() { }" },
+        // Constructors
+        { type: 'mcq', q: "A constructor must have the same name as the...", options: ["Method", "Variable", "Class", "Package"], answer: 2 },
+        { type: 'mcq', q: "Does a constructor have a return type?", options: ["Yes (int)", "Yes (void)", "No", "Yes (String)"], answer: 2 },
+        { type: 'true_false', q: "A class can have multiple constructors.", options: ["True", "False"], answer: 0 },
+        { type: 'mcq', q: "When is a constructor called?", options: ["When class is defined", "When object is created", "When method is called", "When program ends"], answer: 1 },
+        { type: 'input', instruction: "A constructor with no parameters is called...", prefix: "A ", answer: "default", suffix: " constructor." },
+        // General
+        { type: 'input', instruction: "Print output to screen.", prefix: "System.out.", answer: "println", suffix: "(\"Hello\");" },
+        { type: 'true_false', q: "Java is short for JavaScript.", options: ["True", "False"], answer: 1 },
+        { type: 'true_false', q: "Array indexes start with 0.", options: ["True", "False"], answer: 0 },
+        { type: 'input', instruction: "Static method to run a Java program.", prefix: "public static void ", answer: "main", suffix: "(String[] args)" }
     ];
 
+    // --- STATE VARIABLES ---
     let currentQ = 0;
-    let score = 0;
     let studentName = "";
-    let selectedMcqOption = null;
+    let timeLimit = TOTAL_TIME_MINUTES * 60; 
+    let timerInterval;
+    
+    // Array to store user answers (Index matches question index)
+    // Stores: { type: 'mcq'/'input', val: 'userValue' }
+    let userAnswers = new Array(questions.length).fill(null);
 
+    // --- FUNCTIONS ---
     function startTest() {
         const nameInput = document.getElementById('studentName');
         if (nameInput.value.trim() === "") {
@@ -307,6 +326,22 @@
         document.getElementById('quiz-screen').style.display = 'block';
         
         loadQuestion();
+        startTimer();
+    }
+
+    function startTimer() {
+        timerInterval = setInterval(() => {
+            timeLimit--;
+            let minutes = Math.floor(timeLimit / 60);
+            let seconds = timeLimit % 60;
+            let displayMin = minutes < 10 ? '0' + minutes : minutes;
+            let displaySec = seconds < 10 ? '0' + seconds : seconds;
+            document.getElementById('timer-display').innerText = `${displayMin}:${displaySec}`;
+            if (timeLimit <= 0) {
+                clearInterval(timerInterval);
+                finishTest(); // Auto submit
+            }
+        }, 1000);
     }
 
     function loadQuestion() {
@@ -316,61 +351,126 @@
         
         const inputArea = document.getElementById('input-question-area');
         const mcqArea = document.getElementById('mcq-question-area');
-        
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+
+        // Nav Buttons State
+        prevBtn.disabled = (currentQ === 0);
+        if (currentQ === questions.length - 1) {
+            nextBtn.innerText = "Submit Test";
+            nextBtn.className = "btn btn-success w-50 py-3 fw-bold";
+        } else {
+            nextBtn.innerText = "Next Question \u2192";
+            nextBtn.className = "btn btn-primary w-50 py-3 fw-bold";
+        }
+
+        // --- Load stored answer if exists ---
+        const savedAns = userAnswers[currentQ];
+
         if (q.type === 'input') {
             inputArea.style.display = 'block';
             mcqArea.style.display = 'none';
             document.getElementById('code-prefix').innerText = q.prefix;
             document.getElementById('code-suffix').innerText = q.suffix;
-            const input = document.getElementById('user-input-answer');
-            input.value = "";
-            input.focus();
+            
+            const inputField = document.getElementById('user-input-answer');
+            inputField.value = savedAns ? savedAns.val : "";
+            setTimeout(() => inputField.focus(), 100);
+            
         } else {
             inputArea.style.display = 'none';
             mcqArea.style.display = 'block';
             const optionsContainer = document.getElementById('options-container');
             optionsContainer.innerHTML = '';
+            
             q.options.forEach((option, index) => {
                 const btn = document.createElement('button');
                 btn.className = 'btn-option';
+                // Highlight if previously selected
+                if (savedAns && savedAns.val === index) {
+                    btn.classList.add('selected');
+                }
                 btn.innerText = option;
                 btn.onclick = () => selectOption(index, btn);
                 optionsContainer.appendChild(btn);
             });
-            selectedMcqOption = null;
         }
     }
 
+    // Save answer immediately when option clicked
     function selectOption(index, btnElement) {
         const allBtns = document.querySelectorAll('.btn-option');
         allBtns.forEach(b => b.classList.remove('selected'));
         btnElement.classList.add('selected');
-        selectedMcqOption = index;
+        
+        userAnswers[currentQ] = { type: 'mcq', val: index };
     }
 
-    function submitAnswer() {
-        const q = questions[currentQ];
-        let isCorrect = false;
+    // Save answer immediately when typing (oninput)
+    function saveCurrentAnswer() {
+        const val = document.getElementById('user-input-answer').value;
+        userAnswers[currentQ] = { type: 'input', val: val };
+    }
 
-        if (q.type === 'input') {
-            const userAnswer = document.getElementById('user-input-answer').value.trim();
-            // Case-insensitive check (Handles 'String' vs 'string')
-            if (userAnswer.toLowerCase() === q.answer.toLowerCase()) isCorrect = true;
+    function nextQuestion() {
+        // If last question, submit
+        if (currentQ === questions.length - 1) {
+            finishTest();
         } else {
-            if (selectedMcqOption === q.answer) isCorrect = true;
-        }
-
-        if (isCorrect) score++;
-        currentQ++;
-
-        if (currentQ < questions.length) {
+            currentQ++;
             loadQuestion();
-        } else {
-            showResult();
         }
     }
 
-    function showResult() {
+    function prevQuestion() {
+        if (currentQ > 0) {
+            currentQ--;
+            loadQuestion();
+        }
+    }
+
+    function finishTest() {
+        clearInterval(timerInterval);
+        
+        // Calculate Score
+        let score = 0;
+        let detailedReport = [];
+
+        questions.forEach((q, index) => {
+            const uAns = userAnswers[index];
+            let isCorrect = false;
+            let userDisplay = "[No Answer]";
+            let correctDisplay = "";
+
+            if (q.type === 'input') {
+                const userVal = uAns ? uAns.val.trim() : "";
+                userDisplay = userVal || "[Empty]";
+                correctDisplay = q.answer;
+                
+                if (userVal.toLowerCase() === q.answer.toLowerCase()) isCorrect = true;
+            } else {
+                // MCQ / TrueFalse
+                const userIdx = uAns ? uAns.val : null;
+                if (userIdx !== null) {
+                    userDisplay = q.options[userIdx];
+                }
+                correctDisplay = q.options[q.answer];
+                
+                if (userIdx === q.answer) isCorrect = true;
+            }
+
+            if (isCorrect) score++;
+
+            detailedReport.push({
+                qNum: index + 1,
+                question: q.q || (q.instruction + "<br><code>" + q.prefix + "___" + q.suffix + "</code>"),
+                userAns: userDisplay,
+                correctAns: correctDisplay,
+                status: isCorrect
+            });
+        });
+
+        // Show Results
         document.getElementById('quiz-screen').style.display = 'none';
         document.getElementById('result-screen').style.display = 'block';
 
@@ -379,6 +479,52 @@
         
         const percentage = Math.round((score / questions.length) * 100);
         document.getElementById('final-score').innerText = percentage;
+
+       // --- Updated Result Logic ---
+        const msg = document.getElementById('result-message');
+        
+        if (percentage >= 90) {
+            msg.innerText = "Outstanding! You are a Java Star! 🌟";
+            msg.style.color = "#198754"; // Dark Green
+        } 
+        else if (percentage >= 75) {
+            msg.innerText = "Excellent! You have strong concepts. 🚀";
+            msg.style.color = "#20c997"; // Teal
+        } 
+        else if (percentage >= 50) {
+            msg.innerText = "Good Effort! Keep practicing to improve. 👍";
+            msg.style.color = "#0d6efd"; // Blue
+        } 
+        else if (percentage >= 30) {
+            msg.innerText = "Fair Attempt! You need to study more. 📚";
+            msg.style.color = "#ffc107"; // Yellow/Orange
+        } 
+        else {
+            msg.innerText = "Critical! You need serious hard work. ⚠️";
+            msg.style.color = "#dc3545"; // Red
+        }
+        // Generate Report HTML
+        const container = document.getElementById('review-container');
+        let html = "";
+        detailedReport.forEach(item => {
+            const statusClass = item.status ? "review-correct" : "review-wrong";
+            const statusIcon = item.status ? "✅ Correct" : "❌ Wrong";
+            
+            html += `
+                <div class="review-card ${statusClass}">
+                    <div class="d-flex justify-content-between">
+                        <strong>Q${item.qNum}:</strong>
+                        <span>${statusIcon}</span>
+                    </div>
+                    <div class="mb-2 mt-1">${item.question}</div>
+                    <div class="small">
+                        <span class="ans-label">Your Answer:</span> ${item.userAns} <br>
+                        ${!item.status ? `<span class="ans-label text-success">Correct Answer: ${item.correctAns}</span>` : ''}
+                    </div>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
     }
 </script>
 
