@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TriCode Academy - Java Assessment</title>
+    <title>TriCode Academy - MS Word Test</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             background-color: #f8f9fa;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #004a99;
+            color: #2b5797; /* Word Blue */
             user-select: none;
         }
         .container {
@@ -20,147 +20,111 @@
         }
         .card {
             border: none;
-            border-radius: 15px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
             overflow: hidden;
             background-color: #ffffff;
         }
         .card-header {
             background-color: #ffffff;
-            color: #004a99;
-            padding: 20px;
+            border-bottom: 4px solid #2b5797;
+            padding: 25px;
             text-align: center;
-            border-bottom: 3px solid #00a2ff;
         }
         .brand-logo {
-            width: 90px;
+            width: 80px;
             height: auto;
             margin-bottom: 10px;
         }
         .brand-title {
-            font-size: 26px;
+            font-size: 28px;
             font-weight: 800;
+            color: #2b5797;
             letter-spacing: 0.5px;
         }
         .brand-subtitle {
-            font-size: 13px;
+            font-size: 12px;
             opacity: 0.7;
             text-transform: uppercase;
             letter-spacing: 2px;
-            font-weight: 600;
+            font-weight: 700;
+            color: #555;
         }
-        .timer-box {
-            font-size: 22px;
+        .timer-badge {
+            font-size: 20px;
             font-weight: bold;
             color: #d63384;
             background: #fff0f6;
-            padding: 10px 20px;
+            padding: 8px 25px;
             border-radius: 50px;
             border: 2px solid #d63384;
-            display: inline-block;
-            min-width: 120px;
+            min-width: 130px;
             text-align: center;
         }
         .question-box {
-            background-color: #eaf6ff;
-            color: #004a99;
-            padding: 25px;
-            border-radius: 10px;
-            font-family: 'Courier New', Courier, monospace;
+            background-color: #e3f2fd; /* Light Blue */
+            color: #0d47a1;
+            padding: 20px;
+            border-radius: 8px;
             font-size: 18px;
             margin: 20px 0;
-            border-left: 6px solid #00a2ff;
-            line-height: 1.6;
-        }
-        .code-input {
-            border: none;
-            border-bottom: 2px solid #004a99;
-            background: transparent;
-            color: #d63384;
-            width: 150px;
-            text-align: center;
-            font-weight: bold;
-            outline: none;
-            padding: 0 5px;
-            font-size: 19px;
-        }
-        .code-input:focus {
-            border-bottom-color: #d63384;
-            background-color: rgba(214, 51, 132, 0.05);
+            border-left: 5px solid #2b5797;
+            line-height: 1.5;
         }
         .btn-option {
             width: 100%;
             text-align: left;
-            margin-bottom: 12px;
-            padding: 16px;
+            margin-bottom: 10px;
+            padding: 15px;
             border: 2px solid #e9ecef;
             background-color: white;
             color: #495057;
             transition: all 0.2s;
             border-radius: 8px;
             font-weight: 500;
+            font-size: 16px;
         }
         .btn-option:hover {
             background-color: #f1f3f5;
-            border-color: #00a2ff;
+            border-color: #2b5797;
         }
         .btn-option.selected {
-            background-color: #00a2ff;
+            background-color: #2b5797;
             color: white;
-            border-color: #00a2ff;
-            box-shadow: 0 4px 10px rgba(0, 162, 255, 0.3);
+            border-color: #2b5797;
+            box-shadow: 0 4px 10px rgba(43, 87, 151, 0.3);
         }
         .score-circle {
-            width: 160px;
-            height: 160px;
-            background: linear-gradient(135deg, #00a2ff, #004a99);
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #2b5797, #1e3c6b);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 48px;
+            font-size: 42px;
             font-weight: bold;
             margin: 0 auto;
-            box-shadow: 0 10px 25px rgba(0, 74, 153, 0.3);
+            box-shadow: 0 10px 20px rgba(43, 87, 151, 0.3);
         }
-        /* Detailed Report Styles */
         .review-card {
             border-left: 5px solid #ccc;
             background: #fff;
             padding: 15px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
             text-align: left;
         }
-        .review-correct {
-            border-left-color: #198754;
-            background-color: #f0fff4;
-        }
-        .review-wrong {
-            border-left-color: #dc3545;
-            background-color: #fff5f5;
-        }
-        .ans-label {
-            font-weight: bold;
-            font-size: 14px;
-        }
-        .nav-buttons {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
-        }
-        .suggestion-box {
-            background-color: #fff3cd;
-            border: 1px solid #ffecb5;
-            color: #664d03;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-            font-weight: 500;
-        }
+        .review-correct { border-left-color: #198754; background-color: #f0fff4; }
+        .review-wrong { border-left-color: #dc3545; background-color: #fff5f5; }
+        .ans-label { font-weight: bold; font-size: 13px; color: #555; }
+        
         #quiz-screen, #result-screen { display: none; }
+        .nav-buttons { display: flex; gap: 15px; margin-top: 25px; }
+        .btn-primary { background-color: #2b5797; border-color: #2b5797; }
+        .btn-primary:hover { background-color: #1e3c6b; border-color: #1e3c6b; }
     </style>
 </head>
 <body>
@@ -169,7 +133,8 @@
     <div class="card">
         <!-- Header -->
         <div class="card-header">
-            <img src="FINAL_LOGO-removebg-preview.png" alt="TriCode Logo" class="brand-logo" onerror="this.style.display='none'">
+            <!-- Replace with your actual Logo file name -->
+            <img src="FINAL_LOGO-removebg-preview.png" alt="TriCode Logo" class="brand-logo">
             <div class="brand-title">TriCode Academy</div>
             <div class="brand-subtitle">EDUCATION, TECHNOLOGY, INNOVATION</div>
         </div>
@@ -178,26 +143,26 @@
             
             <!-- 1. Start Screen -->
             <div id="start-screen">
-                <h3 class="text-center mb-4 fw-bold">Java Core Monthly Test</h3>
+                <h3 class="text-center mb-4 fw-bold">MS Word Proficiency Test</h3>
                 <div class="mb-4">
                     <label class="form-label fw-bold">Student Full Name</label>
                     <input type="text" id="studentName" class="form-control form-control-lg" placeholder="Enter your full name...">
-                    <small class="text-danger mt-2 d-block" id="name-error" style="display:none;">Please enter your name to start.</small>
+                    <small class="text-danger mt-2 d-block" id="name-error" style="display:none;">Name is required to proceed.</small>
                 </div>
                 
                 <div class="card bg-light border-0 mb-4">
                     <div class="card-body">
-                        <h6 class="fw-bold mb-3">Test Details:</h6>
-                        <ul class="mb-0 text-muted">
-                            <li class="mb-2"><strong>Time Limit:</strong> 60 Minutes (Auto-submit)</li>
-                            <li class="mb-2"><strong>Total Questions:</strong> 40</li>
-                            <li class="mb-2"><strong>Format:</strong> You can review and change answers using Previous/Next buttons.</li>
-                            <li class="mb-2"><strong>Topics:</strong> Variables, Arrays, Operators, Keywords, Methods, Access Modifiers.</li>
+                        <h6 class="fw-bold mb-2">Test Instructions:</h6>
+                        <ul class="mb-0 text-muted small">
+                            <li class="mb-1"><strong>Time Limit:</strong> 30 Minutes.</li>
+                            <li class="mb-1"><strong>Total Questions:</strong> 20 MCQs.</li>
+                            <li class="mb-1"><strong>Topics:</strong> File, Home, Insert, Design, & Layout Tabs.</li>
+                            <li><strong>Navigation:</strong> You can review and change answers before submitting.</li>
                         </ul>
                     </div>
                 </div>
 
-                <button class="btn btn-primary btn-lg w-100 py-3 fw-bold" onclick="startTest()">START TEST NOW</button>
+                <button class="btn btn-primary btn-lg w-100 py-3 fw-bold" onclick="startTest()">START TEST</button>
             </div>
 
             <!-- 2. Quiz Screen -->
@@ -205,10 +170,10 @@
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <div>
                         <span class="text-muted small">Question</span>
-                        <h4 class="mb-0"><span id="q-current">1</span> / 40</h4>
+                        <h4 class="mb-0"><span id="q-current">1</span> / 20</h4>
                     </div>
-                    <div class="timer-box">
-                        <span id="timer-display">60:00</span>
+                    <div class="timer-badge">
+                        <span id="timer-display">30:00</span>
                     </div>
                 </div>
 
@@ -216,51 +181,40 @@
                     <span class="badge bg-light text-dark border px-3 py-2" id="display-name">User</span>
                 </div>
 
-                <h5 id="q-instruction" class="mb-3 fw-bold"></h5>
+                <div class="question-box" id="q-text">
+                    Question text goes here...
+                </div>
                 
-                <!-- Input Type Area -->
-                <div id="input-question-area" class="question-box" style="display: none;">
-                    <span id="code-prefix"></span>
-                    <input type="text" class="code-input" id="user-input-answer" autocomplete="off" spellcheck="false" oninput="saveCurrentAnswer()">
-                    <span id="code-suffix"></span>
+                <div id="options-container">
+                    <!-- Options generated via JS -->
                 </div>
 
-                <!-- MCQ Type Area -->
-                <div id="mcq-question-area" style="display: none;">
-                    <div id="options-container"></div>
-                </div>
-
-                <!-- Navigation Buttons -->
                 <div class="nav-buttons">
-                    <button class="btn btn-outline-secondary w-50 py-3 fw-bold" id="prev-btn" onclick="prevQuestion()" disabled>&larr; Previous</button>
-                    <button class="btn btn-primary w-50 py-3 fw-bold" id="next-btn" onclick="nextQuestion()">Next Question &rarr;</button>
+                    <button class="btn btn-outline-secondary w-50 py-2 fw-bold" id="prev-btn" onclick="prevQuestion()" disabled>Previous</button>
+                    <button class="btn btn-primary w-50 py-2 fw-bold" id="next-btn" onclick="nextQuestion()">Next Question &rarr;</button>
                 </div>
             </div>
 
             <!-- 3. Result Screen -->
             <div id="result-screen" class="text-center">
-                <h2 class="mb-4 fw-bold">Test Submitted!</h2>
+                <h2 class="mb-3 fw-bold text-primary">Test Submitted!</h2>
                 
-                <div class="alert alert-success d-inline-block px-4 py-2 mb-4">
+                <div class="alert alert-primary d-inline-block px-4 py-2 mb-3">
                     Student: <span id="final-name" class="fw-bold"></span>
                 </div>
                 
-                <div class="score-circle mb-4">
+                <div class="score-circle mb-3">
                     <span id="final-score">0</span>%
                 </div>
 
-                <h3 id="result-message" class="fw-bold text-primary mb-2"></h3>
-                <p class="text-muted">You scored <span id="correct-count" class="fw-bold text-dark">0</span> out of 40</p>
+                <h4 id="result-message" class="fw-bold mb-2"></h4>
+                <p class="text-muted">You scored <span id="correct-count" class="fw-bold text-dark">0</span> out of 20</p>
                 
-                <!-- Improvement Advice Box -->
-                <div id="suggestion-area" class="suggestion-box"></div>
-
-                <button class="btn btn-outline-dark mt-4 mb-4" onclick="location.reload()">Back to Home</button>
+                <button class="btn btn-outline-dark mt-3 mb-4" onclick="location.reload()">Back to Home</button>
                 
                 <hr>
                 
-                <!-- Detailed Report -->
-                <h4 class="text-start mt-4 mb-3 fw-bold">Detailed Report</h4>
+                <h5 class="text-start mt-4 mb-3 fw-bold">Detailed Analysis</h5>
                 <div id="review-container"></div>
             </div>
 
@@ -270,63 +224,30 @@
 
 <script>
     // --- CONFIGURATION ---
-    const TOTAL_TIME_MINUTES = 60;
+    const TOTAL_TIME_MINUTES = 30;
     
-    // --- 40 QUESTIONS DATABASE (JAVA CORE) ---
+    // --- 20 QUESTIONS DATABASE (MS WORD) ---
     const questions = [
-        // --- 1. Variables & Datatypes (6 Qs) ---
-        { type: 'input', instruction: "Keyword to declare an integer variable.", prefix: "", answer: "int", suffix: " x = 50;" },
-        { type: 'mcq', q: "What is the size of 'int' data type in Java?", options: ["2 bytes", "4 bytes", "8 bytes", "1 byte"], answer: 1 },
-        { type: 'input', instruction: "Declare a floating point number.", prefix: "", answer: "float", suffix: " price = 9.99f;" },
-        { type: 'mcq', q: "Which data type is best for a True/False value?", options: ["int", "String", "boolean", "bit"], answer: 2 },
-        { type: 'input', instruction: "Keyword to make a variable constant.", prefix: "", answer: "final", suffix: " double PI = 3.14;" },
-        { type: 'mcq', q: "Which of these is a Reference Data Type?", options: ["int", "char", "String", "boolean"], answer: 2 },
-
-        // --- 2. Operators (6 Qs) ---
-        { type: 'mcq', q: "What is the result of 10 % 3?", options: ["3", "1", "0", "3.33"], answer: 1 },
-        { type: 'input', instruction: "Increment operator.", prefix: "count", answer: "++", suffix: ";" },
-        { type: 'input', instruction: "Logical AND operator.", prefix: "if (a > 5 ", answer: "&&", suffix: " b < 10)" },
-        { type: 'mcq', q: "Which operator checks equality?", options: ["=", "==", "equals", ":="], answer: 1 },
-        { type: 'input', instruction: "Assignment operator.", prefix: "String name ", answer: "=", suffix: " \"Ali\";" },
-        { type: 'coding', q: "Output of: System.out.println(5 + \"5\");", options: ["10", "55", "Error", "5 5"], answer: 1, type: 'mcq' },
-
-        // --- 3. Arrays (5 Qs) ---
-        { type: 'input', instruction: "Define an array of integers.", prefix: "", answer: "int[]", suffix: " numbers = {1, 2, 3};" },
-        { type: 'mcq', q: "Array indexes start from?", options: ["1", "0", "-1", "Random"], answer: 1 },
-        { type: 'input', instruction: "Property to get array size.", prefix: "numbers.", answer: "length", suffix: ";" },
-        { type: 'mcq', q: "Valid way to create an array of size 5?", options: ["int arr = new int[5];", "int[] arr = new int[5];", "arr = {1,2,3,4,5};", "Array<int> arr = new Array(5);"], answer: 1 },
-        { type: 'coding', q: "int[] a = {10, 20}; System.out.println(a[1]); Output?", options: ["10", "20", "0", "Error"], answer: 1, type: 'mcq' },
-
-        // --- 4. Keywords & Access Modifiers (7 Qs) ---
-        { type: 'mcq', q: "Which modifier makes a member accessible ONLY within its own class?", options: ["public", "protected", "private", "default"], answer: 2 },
-        { type: 'mcq', q: "Which keyword creates a new object?", options: ["class", "create", "new", "this"], answer: 2 },
-        { type: 'input', instruction: "Keyword to return a value from a method.", prefix: "", answer: "return", suffix: " total;" },
-        { type: 'input', instruction: "Keyword to refer to the current object.", prefix: "", answer: "this", suffix: ".name = name;" },
-        { type: 'mcq', q: "Keyword used for inheritance?", options: ["inherits", "extends", "implements", "super"], answer: 1 },
-        { type: 'input', instruction: "Static keyword means variable belongs to...", prefix: "Belongs to the ", answer: "class", suffix: ", not object." },
-        { type: 'true_false', q: "'goto' is a reserved keyword in Java but not used.", options: ["True", "False"], answer: 0 },
-
-        // --- 5. Structure of Class & Method (6 Qs) ---
-        { type: 'input', instruction: "Correct signature of main method.", prefix: "public static ", answer: "void", suffix: " main(String[] args)" },
-        { type: 'mcq', q: "A class name should start with...", options: ["Lowercase letter", "Uppercase letter", "Number", "Underscore"], answer: 1 },
-        { type: 'input', instruction: "Define a class.", prefix: "", answer: "class", suffix: " Student { }" },
-        { type: 'mcq', q: "What is a Constructor?", options: ["A method to print", "A special method to initialize objects", "A variable", "A loop"], answer: 1 },
-        { type: 'true_false', q: "A constructor has no return type, not even void.", options: ["True", "False"], answer: 0 },
-        { type: 'input', instruction: "Print to console.", prefix: "System.out.", answer: "println", suffix: "(\"Hello\");" },
-
-        // --- 6. Control Flow & Loops (6 Qs) ---
-        { type: 'input', instruction: "Keyword to stop a loop.", prefix: "", answer: "break", suffix: ";" },
-        { type: 'input', instruction: "Start a for loop.", prefix: "", answer: "for", suffix: "(int i=0; i<10; i++)" },
-        { type: 'mcq', q: "Which loop runs at least once?", options: ["for", "while", "do-while", "foreach"], answer: 2 },
-        { type: 'input', instruction: "Keyword to skip iteration.", prefix: "", answer: "continue", suffix: ";" },
-        { type: 'mcq', q: "Correct syntax for if statement?", options: ["if x > y then", "if (x > y)", "if {x > y}", "if x > y:"], answer: 1 },
-        { type: 'input', instruction: "Else if keyword.", prefix: "if (a) {...} ", answer: "else if", suffix: " (b) {...}" },
-
-        // --- 7. General & Functions (4 Qs) ---
-        { type: 'input', instruction: "Import Scanner class.", prefix: "import ", answer: "java.util.Scanner", suffix: ";" },
-        { type: 'mcq', q: "Method overloading means...", options: ["Same name, different parameters", "Same name, same parameters", "Different name", "None"], answer: 0 },
-        { type: 'input', instruction: "Create a Scanner object.", prefix: "Scanner sc = ", answer: "new", suffix: " Scanner(System.in);" },
-        { type: 'mcq', q: "Java code is compiled into?", options: ["Machine code", "Bytecode", "HTML", "Binary"], answer: 1 }
+        { q: "Which tab allows you to save, print, or export a document (Backstage View)?", options: ["Home", "File", "Insert", "Layout"], answer: 1 },
+        { q: "Where can you find the 'Font' group to change text style (Bold, Italic)?", options: ["Design", "Layout", "Home", "View"], answer: 2 },
+        { q: "Which tab allows you to insert a Table into the document?", options: ["Insert", "Layout", "Home", "Design"], answer: 0 },
+        { q: "Where can you change the page margins (Normal, Narrow)?", options: ["Home", "Design", "Layout", "Review"], answer: 2 },
+        { q: "Which tab allows you to add a Watermark to the page background?", options: ["Layout", "Insert", "Design", "Home"], answer: 2 },
+        { q: "Which tool allows you to copy formatting from one text to another?", options: ["Paste Special", "Format Painter", "Styles", "Copy"], answer: 1 },
+        { q: "Where can you find the option to add a Header or Footer?", options: ["Layout", "Home", "Insert", "View"], answer: 2 },
+        { q: "Which tab allows you to change the Page Orientation (Portrait/Landscape)?", options: ["Design", "Layout", "Insert", "Home"], answer: 1 },
+        { q: "Where is the 'Find and Replace' tool located?", options: ["Home", "Review", "View", "File"], answer: 0 },
+        { q: "Which tab contains the 'Page Borders' option?", options: ["Layout", "Insert", "Home", "Design"], answer: 3 },
+        { q: "Which tab allows you to split text into multiple Columns?", options: ["Insert", "Layout", "Home", "Design"], answer: 1 },
+        { q: "Where can you insert a 'Page Break' manually?", options: ["Home", "Layout", "Insert", "Design"], answer: 2 },
+        { q: "Which tab displays the Ruler checkbox?", options: ["Home", "Review", "View", "Layout"], answer: 2 },
+        { q: "Where can you find the 'Styles' gallery (Heading 1, Normal)?", options: ["Design", "Insert", "Home", "Layout"], answer: 2 },
+        { q: "Which tab allows you to insert a Picture or Shape?", options: ["Layout", "Design", "Home", "Insert"], answer: 3 },
+        { q: "To change the spacing 'After' a paragraph specifically using points (pt), go to:", options: ["Home", "Layout", "Design", "Review"], answer: 1 },
+        { q: "Which tab allows you to insert a Hyperlink?", options: ["Home", "References", "Insert", "Review"], answer: 2 },
+        { q: "Where can you change the overall 'Theme' (Colors/Fonts) of the document?", options: ["Layout", "Home", "Design", "Insert"], answer: 2 },
+        { q: "Which tab is used to check spelling and grammar?", options: ["Home", "Review", "View", "Layout"], answer: 1 },
+        { q: "Where can you find the Word Count of your document?", options: ["Home", "Review", "File", "Insert"], answer: 1 } // Review tab has word count button
     ];
 
     // --- VARIABLES ---
@@ -362,6 +283,11 @@
             let displayMin = minutes < 10 ? '0' + minutes : minutes;
             let displaySec = seconds < 10 ? '0' + seconds : seconds;
             document.getElementById('timer-display').innerText = `${displayMin}:${displaySec}`;
+            
+            if (timeLimit <= 10) {
+                document.getElementById('timer-display').style.color = 'red';
+            }
+
             if (timeLimit <= 0) {
                 clearInterval(timerInterval);
                 finishTest(); 
@@ -372,10 +298,8 @@
     function loadQuestion() {
         const q = questions[currentQ];
         document.getElementById('q-current').innerText = currentQ + 1;
-        document.getElementById('q-instruction').innerText = q.instruction || q.q;
+        document.getElementById('q-text').innerText = q.q;
         
-        const inputArea = document.getElementById('input-question-area');
-        const mcqArea = document.getElementById('mcq-question-area');
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
 
@@ -383,53 +307,34 @@
         prevBtn.disabled = (currentQ === 0);
         if (currentQ === questions.length - 1) {
             nextBtn.innerText = "Submit Test";
-            nextBtn.className = "btn btn-success w-50 py-3 fw-bold";
+            nextBtn.className = "btn btn-success w-50 py-2 fw-bold";
         } else {
             nextBtn.innerText = "Next Question \u2192";
-            nextBtn.className = "btn btn-primary w-50 py-3 fw-bold";
+            nextBtn.className = "btn btn-primary w-50 py-2 fw-bold";
         }
 
-        // Restore Answer
-        const savedAns = userAnswers[currentQ];
-
-        if (q.type === 'input') {
-            inputArea.style.display = 'block';
-            mcqArea.style.display = 'none';
-            document.getElementById('code-prefix').innerText = q.prefix;
-            document.getElementById('code-suffix').innerText = q.suffix;
-            
-            const inputField = document.getElementById('user-input-answer');
-            inputField.value = savedAns ? savedAns.val : "";
-            setTimeout(() => inputField.focus(), 100);
-        } else {
-            inputArea.style.display = 'none';
-            mcqArea.style.display = 'block';
-            const optionsContainer = document.getElementById('options-container');
-            optionsContainer.innerHTML = '';
-            
-            q.options.forEach((option, index) => {
-                const btn = document.createElement('button');
-                btn.className = 'btn-option';
-                if (savedAns && savedAns.val === index) {
-                    btn.classList.add('selected');
-                }
-                btn.innerText = option;
-                btn.onclick = () => selectOption(index, btn);
-                optionsContainer.appendChild(btn);
-            });
-        }
+        // Render Options
+        const container = document.getElementById('options-container');
+        container.innerHTML = '';
+        
+        q.options.forEach((opt, index) => {
+            const btn = document.createElement('button');
+            btn.className = 'btn-option';
+            // Highlight if previously selected
+            if (userAnswers[currentQ] === index) {
+                btn.classList.add('selected');
+            }
+            btn.innerText = opt;
+            btn.onclick = () => selectOption(index, btn);
+            container.appendChild(btn);
+        });
     }
 
     function selectOption(index, btnElement) {
         const allBtns = document.querySelectorAll('.btn-option');
         allBtns.forEach(b => b.classList.remove('selected'));
         btnElement.classList.add('selected');
-        userAnswers[currentQ] = { type: 'mcq', val: index };
-    }
-
-    function saveCurrentAnswer() {
-        const val = document.getElementById('user-input-answer').value;
-        userAnswers[currentQ] = { type: 'input', val: val };
+        userAnswers[currentQ] = index;
     }
 
     function nextQuestion() {
@@ -456,39 +361,24 @@
 
         questions.forEach((q, index) => {
             const uAns = userAnswers[index];
-            let isCorrect = false;
-            let userDisplay = "[No Answer]";
-            let correctDisplay = "";
-
-            if (q.type === 'input') {
-                const userVal = uAns ? uAns.val.trim() : "";
-                userDisplay = userVal || "[Empty]";
-                correctDisplay = q.answer;
-                
-                // Case Insensitive Match
-                if (userVal.toLowerCase() === q.answer.toLowerCase()) isCorrect = true;
-            } else {
-                // MCQ / Coding / TrueFalse
-                const userIdx = uAns ? uAns.val : null;
-                if (userIdx !== null) {
-                    userDisplay = q.options[userIdx];
-                }
-                correctDisplay = q.options[q.answer];
-                if (userIdx === q.answer) isCorrect = true;
-            }
-
+            const isCorrect = (uAns === q.answer);
+            
             if (isCorrect) score++;
+
+            // Create Report Data
+            let userText = (uAns !== null) ? q.options[uAns] : "[Skipped]";
+            let correctText = q.options[q.answer];
 
             detailedReport.push({
                 qNum: index + 1,
-                question: q.q || (q.instruction + "<br><code>" + q.prefix + "___" + q.suffix + "</code>"),
-                userAns: userDisplay,
-                correctAns: correctDisplay,
+                question: q.q,
+                userAns: userText,
+                correctAns: correctText,
                 status: isCorrect
             });
         });
 
-        // Show Result UI
+        // Show Results
         document.getElementById('quiz-screen').style.display = 'none';
         document.getElementById('result-screen').style.display = 'block';
 
@@ -498,44 +388,20 @@
         const percentage = Math.round((score / questions.length) * 100);
         document.getElementById('final-score').innerText = percentage;
 
-        // --- 5 Category Feedback Logic ---
+        // Feedback Message
         const msg = document.getElementById('result-message');
-        const advice = document.getElementById('suggestion-area');
-        
         if (percentage >= 90) {
-            msg.innerText = "Outstanding! You are a Java Star! 🌟";
+            msg.innerText = "Outstanding! MS Word Expert! 🌟";
             msg.style.color = "#198754";
-            advice.innerText = "Recommendation: You are ready for Advanced Java! Start helping your peers.";
-            advice.style.backgroundColor = "#d1e7dd";
-            advice.style.color = "#0f5132";
-        } 
-        else if (percentage >= 75) {
-            msg.innerText = "Excellent! You have strong concepts. 🚀";
-            msg.style.color = "#20c997";
-            advice.innerText = "Recommendation: Try solving competitive programming questions to sharpen logic.";
-            advice.style.backgroundColor = "#d1e7dd";
-            advice.style.color = "#0f5132";
-        } 
-        else if (percentage >= 50) {
+        } else if (percentage >= 70) {
+            msg.innerText = "Excellent Work! 🚀";
+            msg.style.color = "#2b5797";
+        } else if (percentage >= 50) {
             msg.innerText = "Good Effort! Keep practicing. 👍";
-            msg.style.color = "#0d6efd";
-            advice.innerText = "Recommendation: Revise Arrays and Loops. You can do better!";
-            advice.style.backgroundColor = "#cff4fc";
-            advice.style.color = "#055160";
-        } 
-        else if (percentage >= 30) {
-            msg.innerText = "Fair Attempt! You need to study more. 📚";
-            msg.style.color = "#ffc107";
-            advice.innerText = "Recommendation: Re-watch lecture videos and focus on Syntax rules.";
-            advice.style.backgroundColor = "#fff3cd";
-            advice.style.color = "#664d03";
-        } 
-        else {
-            msg.innerText = "Critical! You need serious hard work. ⚠️";
+            msg.style.color = "#fd7e14";
+        } else {
+            msg.innerText = "Needs Improvement. Review the tabs again. 📚";
             msg.style.color = "#dc3545";
-            advice.innerText = "Recommendation: Please restart from Variables & Data Types immediately.";
-            advice.style.backgroundColor = "#f8d7da";
-            advice.style.color = "#842029";
         }
 
         // Generate Detailed Report
@@ -547,11 +413,11 @@
             
             html += `
                 <div class="review-card ${statusClass}">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between mb-1">
                         <strong>Q${item.qNum}:</strong>
                         <span>${statusIcon}</span>
                     </div>
-                    <div class="mb-2 mt-1">${item.question}</div>
+                    <div class="mb-2">${item.question}</div>
                     <div class="small">
                         <span class="ans-label">Your Answer:</span> ${item.userAns} <br>
                         ${!item.status ? `<span class="ans-label text-success">Correct Answer: ${item.correctAns}</span>` : ''}
@@ -565,4 +431,5 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
