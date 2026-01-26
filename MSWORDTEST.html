@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TriCode Academy - MS Word Test</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #2b5797; /* Word Blue */
+            user-select: none;
+        }
+        .container {
+            max-width: 850px;
+            margin-top: 30px;
+            margin-bottom: 50px;
+        }
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            background-color: #ffffff;
+        }
+        .card-header {
+            background-color: #ffffff;
+            border-bottom: 4px solid #2b5797;
+            padding: 25px;
+            text-align: center;
+        }
+        .brand-logo {
+            width: 80px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        .brand-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #2b5797;
+            letter-spacing: 0.5px;
+        }
+        .brand-subtitle {
+            font-size: 12px;
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            color: #555;
+        }
+        .timer-badge {
+            font-size: 20px;
+            font-weight: bold;
+            color: #d63384;
+            background: #fff0f6;
+            padding: 8px 25px;
+            border-radius: 50px;
+            border: 2px solid #d63384;
+            min-width: 130px;
+            text-align: center;
+        }
+        .question-box {
+            background-color: #e3f2fd; /* Light Blue */
+            color: #0d47a1;
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 18px;
+            margin: 20px 0;
+            border-left: 5px solid #2b5797;
+            line-height: 1.5;
+        }
+        .btn-option {
+            width: 100%;
+            text-align: left;
+            margin-bottom: 10px;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            background-color: white;
+            color: #495057;
+            transition: all 0.2s;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 16px;
+        }
+        .btn-option:hover {
+            background-color: #f1f3f5;
+            border-color: #2b5797;
+        }
+        .btn-option.selected {
+            background-color: #2b5797;
+            color: white;
+            border-color: #2b5797;
+            box-shadow: 0 4px 10px rgba(43, 87, 151, 0.3);
+        }
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #2b5797, #1e3c6b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 42px;
+            font-weight: bold;
+            margin: 0 auto;
+            box-shadow: 0 10px 20px rgba(43, 87, 151, 0.3);
+        }
+        .review-card {
+            border-left: 5px solid #ccc;
+            background: #fff;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            text-align: left;
+        }
+        .review-correct { border-left-color: #198754; background-color: #f0fff4; }
+        .review-wrong { border-left-color: #dc3545; background-color: #fff5f5; }
+        .ans-label { font-weight: bold; font-size: 13px; color: #555; }
+        
+        #quiz-screen, #result-screen { display: none; }
+        .nav-buttons { display: flex; gap: 15px; margin-top: 25px; }
+        .btn-primary { background-color: #2b5797; border-color: #2b5797; }
+        .btn-primary:hover { background-color: #1e3c6b; border-color: #1e3c6b; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card">
+        <!-- Header -->
+        <div class="card-header">
+            <!-- Replace with your actual Logo file name -->
+            <img src="FINAL_LOGO-removebg-preview.png" alt="TriCode Logo" class="brand-logo">
+            <div class="brand-title">TriCode Academy</div>
+            <div class="brand-subtitle">EDUCATION, TECHNOLOGY, INNOVATION</div>
+        </div>
+
+        <div class="card-body p-4 p-md-5">
+            
+            <!-- 1. Start Screen -->
+            <div id="start-screen">
+                <h3 class="text-center mb-4 fw-bold">MS Word Proficiency Test</h3>
+                <div class="mb-4">
+                    <label class="form-label fw-bold">Student Full Name</label>
+                    <input type="text" id="studentName" class="form-control form-control-lg" placeholder="Enter your full name...">
+                    <small class="text-danger mt-2 d-block" id="name-error" style="display:none;">Name is required to proceed.</small>
+                </div>
+                
+                <div class="card bg-light border-0 mb-4">
+                    <div class="card-body">
+                        <h6 class="fw-bold mb-2">Test Instructions:</h6>
+                        <ul class="mb-0 text-muted small">
+                            <li class="mb-1"><strong>Time Limit:</strong> 30 Minutes.</li>
+                            <li class="mb-1"><strong>Total Questions:</strong> 20 MCQs.</li>
+                            <li class="mb-1"><strong>Topics:</strong> File, Home, Insert, Design, & Layout Tabs.</li>
+                            <li><strong>Navigation:</strong> You can review and change answers before submitting.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-lg w-100 py-3 fw-bold" onclick="startTest()">START TEST</button>
+            </div>
+
+            <!-- 2. Quiz Screen -->
+            <div id="quiz-screen">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                        <span class="text-muted small">Question</span>
+                        <h4 class="mb-0"><span id="q-current">1</span> / 20</h4>
+                    </div>
+                    <div class="timer-badge">
+                        <span id="timer-display">30:00</span>
+                    </div>
+                </div>
+
+                <div class="mb-3 text-end">
+                    <span class="badge bg-light text-dark border px-3 py-2" id="display-name">User</span>
+                </div>
+
+                <div class="question-box" id="q-text">
+                    Question text goes here...
+                </div>
+                
+                <div id="options-container">
+                    <!-- Options generated via JS -->
+                </div>
+
+                <div class="nav-buttons">
+                    <button class="btn btn-outline-secondary w-50 py-2 fw-bold" id="prev-btn" onclick="prevQuestion()" disabled>Previous</button>
+                    <button class="btn btn-primary w-50 py-2 fw-bold" id="next-btn" onclick="nextQuestion()">Next Question &rarr;</button>
+                </div>
+            </div>
+
+            <!-- 3. Result Screen -->
+            <div id="result-screen" class="text-center">
+                <h2 class="mb-3 fw-bold text-primary">Test Submitted!</h2>
+                
+                <div class="alert alert-primary d-inline-block px-4 py-2 mb-3">
+                    Student: <span id="final-name" class="fw-bold"></span>
+                </div>
+                
+                <div class="score-circle mb-3">
+                    <span id="final-score">0</span>%
+                </div>
+
+                <h4 id="result-message" class="fw-bold mb-2"></h4>
+                <p class="text-muted">You scored <span id="correct-count" class="fw-bold text-dark">0</span> out of 20</p>
+                
+                <button class="btn btn-outline-dark mt-3 mb-4" onclick="location.reload()">Back to Home</button>
+                
+                <hr>
+                
+                <h5 class="text-start mt-4 mb-3 fw-bold">Detailed Analysis</h5>
+                <div id="review-container"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- CONFIGURATION ---
+    const TOTAL_TIME_MINUTES = 30;
+    
+    // --- 20 QUESTIONS DATABASE (MS WORD) ---
+    const questions = [
+        { q: "Which tab allows you to save, print, or export a document (Backstage View)?", options: ["Home", "File", "Insert", "Layout"], answer: 1 },
+        { q: "Where can you find the 'Font' group to change text style (Bold, Italic)?", options: ["Design", "Layout", "Home", "View"], answer: 2 },
+        { q: "Which tab allows you to insert a Table into the document?", options: ["Insert", "Layout", "Home", "Design"], answer: 0 },
+        { q: "Where can you change the page margins (Normal, Narrow)?", options: ["Home", "Design", "Layout", "Review"], answer: 2 },
+        { q: "Which tab allows you to add a Watermark to the page background?", options: ["Layout", "Insert", "Design", "Home"], answer: 2 },
+        { q: "Which tool allows you to copy formatting from one text to another?", options: ["Paste Special", "Format Painter", "Styles", "Copy"], answer: 1 },
+        { q: "Where can you find the option to add a Header or Footer?", options: ["Layout", "Home", "Insert", "View"], answer: 2 },
+        { q: "Which tab allows you to change the Page Orientation (Portrait/Landscape)?", options: ["Design", "Layout", "Insert", "Home"], answer: 1 },
+        { q: "Where is the 'Find and Replace' tool located?", options: ["Home", "Review", "View", "File"], answer: 0 },
+        { q: "Which tab contains the 'Page Borders' option?", options: ["Layout", "Insert", "Home", "Design"], answer: 3 },
+        { q: "Which tab allows you to split text into multiple Columns?", options: ["Insert", "Layout", "Home", "Design"], answer: 1 },
+        { q: "Where can you insert a 'Page Break' manually?", options: ["Home", "Layout", "Insert", "Design"], answer: 2 },
+        { q: "Which tab displays the Ruler checkbox?", options: ["Home", "Review", "View", "Layout"], answer: 2 },
+        { q: "Where can you find the 'Styles' gallery (Heading 1, Normal)?", options: ["Design", "Insert", "Home", "Layout"], answer: 2 },
+        { q: "Which tab allows you to insert a Picture or Shape?", options: ["Layout", "Design", "Home", "Insert"], answer: 3 },
+        { q: "To change the spacing 'After' a paragraph specifically using points (pt), go to:", options: ["Home", "Layout", "Design", "Review"], answer: 1 },
+        { q: "Which tab allows you to insert a Hyperlink?", options: ["Home", "References", "Insert", "Review"], answer: 2 },
+        { q: "Where can you change the overall 'Theme' (Colors/Fonts) of the document?", options: ["Layout", "Home", "Design", "Insert"], answer: 2 },
+        { q: "Which tab is used to check spelling and grammar?", options: ["Home", "Review", "View", "Layout"], answer: 1 },
+        { q: "Where can you find the Word Count of your document?", options: ["Home", "Review", "File", "Insert"], answer: 1 } // Review tab has word count button
+    ];
+
+    // --- VARIABLES ---
+    let currentQ = 0;
+    let score = 0;
+    let studentName = "";
+    let timeLimit = TOTAL_TIME_MINUTES * 60; 
+    let timerInterval;
+    let userAnswers = new Array(questions.length).fill(null);
+
+    // --- FUNCTIONS ---
+    function startTest() {
+        const nameInput = document.getElementById('studentName');
+        if (nameInput.value.trim() === "") {
+            document.getElementById('name-error').style.display = 'block';
+            return;
+        }
+        studentName = nameInput.value;
+        document.getElementById('display-name').innerText = studentName;
+        
+        document.getElementById('start-screen').style.display = 'none';
+        document.getElementById('quiz-screen').style.display = 'block';
+        
+        loadQuestion();
+        startTimer();
+    }
+
+    function startTimer() {
+        timerInterval = setInterval(() => {
+            timeLimit--;
+            let minutes = Math.floor(timeLimit / 60);
+            let seconds = timeLimit % 60;
+            let displayMin = minutes < 10 ? '0' + minutes : minutes;
+            let displaySec = seconds < 10 ? '0' + seconds : seconds;
+            document.getElementById('timer-display').innerText = `${displayMin}:${displaySec}`;
+            
+            if (timeLimit <= 10) {
+                document.getElementById('timer-display').style.color = 'red';
+            }
+
+            if (timeLimit <= 0) {
+                clearInterval(timerInterval);
+                finishTest(); 
+            }
+        }, 1000);
+    }
+
+    function loadQuestion() {
+        const q = questions[currentQ];
+        document.getElementById('q-current').innerText = currentQ + 1;
+        document.getElementById('q-text').innerText = q.q;
+        
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+
+        // Buttons Logic
+        prevBtn.disabled = (currentQ === 0);
+        if (currentQ === questions.length - 1) {
+            nextBtn.innerText = "Submit Test";
+            nextBtn.className = "btn btn-success w-50 py-2 fw-bold";
+        } else {
+            nextBtn.innerText = "Next Question \u2192";
+            nextBtn.className = "btn btn-primary w-50 py-2 fw-bold";
+        }
+
+        // Render Options
+        const container = document.getElementById('options-container');
+        container.innerHTML = '';
+        
+        q.options.forEach((opt, index) => {
+            const btn = document.createElement('button');
+            btn.className = 'btn-option';
+            // Highlight if previously selected
+            if (userAnswers[currentQ] === index) {
+                btn.classList.add('selected');
+            }
+            btn.innerText = opt;
+            btn.onclick = () => selectOption(index, btn);
+            container.appendChild(btn);
+        });
+    }
+
+    function selectOption(index, btnElement) {
+        const allBtns = document.querySelectorAll('.btn-option');
+        allBtns.forEach(b => b.classList.remove('selected'));
+        btnElement.classList.add('selected');
+        userAnswers[currentQ] = index;
+    }
+
+    function nextQuestion() {
+        if (currentQ === questions.length - 1) {
+            finishTest();
+        } else {
+            currentQ++;
+            loadQuestion();
+        }
+    }
+
+    function prevQuestion() {
+        if (currentQ > 0) {
+            currentQ--;
+            loadQuestion();
+        }
+    }
+
+    function finishTest() {
+        clearInterval(timerInterval);
+        
+        let score = 0;
+        let detailedReport = [];
+
+        questions.forEach((q, index) => {
+            const uAns = userAnswers[index];
+            const isCorrect = (uAns === q.answer);
+            
+            if (isCorrect) score++;
+
+            // Create Report Data
+            let userText = (uAns !== null) ? q.options[uAns] : "[Skipped]";
+            let correctText = q.options[q.answer];
+
+            detailedReport.push({
+                qNum: index + 1,
+                question: q.q,
+                userAns: userText,
+                correctAns: correctText,
+                status: isCorrect
+            });
+        });
+
+        // Show Results
+        document.getElementById('quiz-screen').style.display = 'none';
+        document.getElementById('result-screen').style.display = 'block';
+
+        document.getElementById('final-name').innerText = studentName;
+        document.getElementById('correct-count').innerText = score;
+        
+        const percentage = Math.round((score / questions.length) * 100);
+        document.getElementById('final-score').innerText = percentage;
+
+        // Feedback Message
+        const msg = document.getElementById('result-message');
+        if (percentage >= 90) {
+            msg.innerText = "Outstanding! MS Word Expert! 🌟";
+            msg.style.color = "#198754";
+        } else if (percentage >= 70) {
+            msg.innerText = "Excellent Work! 🚀";
+            msg.style.color = "#2b5797";
+        } else if (percentage >= 50) {
+            msg.innerText = "Good Effort! Keep practicing. 👍";
+            msg.style.color = "#fd7e14";
+        } else {
+            msg.innerText = "Needs Improvement. Review the tabs again. 📚";
+            msg.style.color = "#dc3545";
+        }
+
+        // Generate Detailed Report
+        const container = document.getElementById('review-container');
+        let html = "";
+        detailedReport.forEach(item => {
+            const statusClass = item.status ? "review-correct" : "review-wrong";
+            const statusIcon = item.status ? "✅ Correct" : "❌ Wrong";
+            
+            html += `
+                <div class="review-card ${statusClass}">
+                    <div class="d-flex justify-content-between mb-1">
+                        <strong>Q${item.qNum}:</strong>
+                        <span>${statusIcon}</span>
+                    </div>
+                    <div class="mb-2">${item.question}</div>
+                    <div class="small">
+                        <span class="ans-label">Your Answer:</span> ${item.userAns} <br>
+                        ${!item.status ? `<span class="ans-label text-success">Correct Answer: ${item.correctAns}</span>` : ''}
+                    </div>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
