@@ -3,301 +3,389 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TriCode Academy - Professional C Exam</title>
+    <title>TriCode Academy - Professional Certification Exam</title>
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --tricode-blue: #004a99; --dark-bg: #212529; --code-bg: #1e1e1e; }
-        body { background-color: #f4f6f8; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; user-select: none; }
-        
-        .exam-container { max-width: 900px; margin: 40px auto; }
-        .card { border: none; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.1); overflow: hidden; }
-        
-        .header { background: var(--tricode-blue); color: white; padding: 30px; text-align: center; }
-        .brand-title { font-weight: 800; letter-spacing: 1px; margin: 0; font-size: 2rem; }
-        .brand-sub { opacity: 0.8; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; }
-        
-        .timer-badge {
-            background: #fff0f3; color: #d63384; border: 2px solid #d63384;
-            padding: 8px 20px; border-radius: 50px; font-weight: bold; font-size: 1.2rem;
+        :root {
+            --tricode-blue: #004a99;
+            --tricode-light: #e6f0fa;
+            --tricode-accent: #00a8ff;
+            --dark-bg: #1e1e1e;
+            --answered-color: #20c997;
+            --current-color: #ffc107;
+            --text-main: #2d3436;
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: 'Poppins', sans-serif;
+            user-select: none;
+            min-height: 100vh;
         }
         
-        .question-area { min-height: 300px; }
-        .q-category { color: var(--tricode-blue); font-weight: 700; text-transform: uppercase; font-size: 0.85rem; margin-bottom: 10px; display: block; }
-        .q-text { font-size: 1.3rem; font-weight: 600; color: #333; margin-bottom: 20px; }
+        .header { 
+            background: rgba(255, 255, 255, 0.95); 
+            border-bottom: 4px solid var(--tricode-blue); 
+            padding: 15px 30px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+            backdrop-filter: blur(10px);
+        }
+        .academy-logo { width: 130px; height: auto; transition: transform 0.3s; }
+        .academy-logo:hover { transform: scale(1.05); }
         
-        /* Code Block Styles */
+        .timer-badge { 
+            font-size: 1.3rem; 
+            font-weight: 700; 
+            color: #d63031; 
+            background: #ffeaa7; 
+            padding: 8px 20px; 
+            border-radius: 50px; 
+            box-shadow: 0 4px 10px rgba(214, 48, 49, 0.2);
+            border: 2px solid #fab1a0;
+        }
+        
+        /* Grid Navigation Styles */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 10px;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        @media (max-width: 768px) {
+            .grid-container { grid-template-columns: repeat(5, 1fr); }
+        }
+        .grid-btn {
+            width: 100%; padding: 12px 0; border-radius: 8px; border: 2px solid #f1f2f6;
+            background: #f8f9fa; font-weight: 600; color: #636e72; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1rem;
+        }
+        .grid-btn:hover { background: var(--tricode-light); border-color: var(--tricode-blue); color: var(--tricode-blue); transform: translateY(-2px); }
+        .grid-btn.answered { background: var(--answered-color); color: white; border-color: var(--answered-color); box-shadow: 0 4px 10px rgba(32, 201, 151, 0.3); }
+        .grid-btn.current { background: var(--current-color); color: #000; border-color: #fdcb6e; box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4); transform: scale(1.05); }
+
+        /* Question Area */
+        .question-card { 
+            background: white; 
+            border-radius: 16px; 
+            padding: 40px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.06); 
+            min-height: 420px; 
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+        .q-category { 
+            background: var(--tricode-light); 
+            color: var(--tricode-blue); 
+            padding: 6px 15px; 
+            border-radius: 50px; 
+            font-size: 0.85rem; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            margin-bottom: 20px; 
+            display: inline-block; 
+            letter-spacing: 1px;
+        }
+        .q-text { font-size: 1.4rem; font-weight: 600; color: var(--text-main); margin-bottom: 30px; line-height: 1.6; }
+        
+        /* Fill-in-the-blank Code Styles */
         .code-block {
-            background: var(--code-bg); color: #d4d4d4; padding: 20px;
-            border-radius: 8px; font-family: 'Consolas', monospace; font-size: 1.1rem;
-            border-left: 5px solid #00a8ff; margin-bottom: 25px; line-height: 1.6;
+            background: var(--dark-bg); color: #d4d4d4; padding: 25px; border-radius: 12px;
+            font-family: 'Fira Code', 'Consolas', monospace; font-size: 1.15rem; 
+            border-left: 6px solid var(--tricode-accent); margin-bottom: 30px; line-height: 1.8;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.2);
         }
         .code-input {
-            background: transparent; border: none; border-bottom: 2px solid #00a8ff;
-            color: #00a8ff; width: 100px; text-align: center; font-weight: bold;
-            outline: none; padding: 0 5px;
+            background: #2d3436; border: 2px dashed var(--tricode-accent); color: #81ecec; width: 130px;
+            text-align: center; font-weight: bold; outline: none; padding: 4px 8px; border-radius: 6px;
+            transition: all 0.3s;
         }
-        .code-input:focus { background: rgba(0, 168, 255, 0.1); }
+        .code-input:focus { border-style: solid; background: #353b48; box-shadow: 0 0 10px rgba(0, 168, 255, 0.3); }
 
         /* MCQ Styles */
         .opt-btn {
-            display: block; width: 100%; text-align: left; padding: 15px 20px;
-            margin-bottom: 10px; border: 2px solid #e9ecef; border-radius: 8px;
-            background: white; transition: all 0.2s; font-weight: 500; color: #495057;
+            display: block; width: 100%; text-align: left; padding: 18px 25px; margin-bottom: 15px;
+            border: 2px solid #dfe6e9; border-radius: 12px; background: white; transition: all 0.2s ease; 
+            font-weight: 500; font-size: 1.1rem; color: #2d3436; position: relative; overflow: hidden;
         }
-        .opt-btn:hover { border-color: var(--tricode-blue); background: #f8fbff; }
-        .opt-btn.selected { background: var(--tricode-blue); color: white; border-color: var(--tricode-blue); }
+        .opt-btn:hover { border-color: var(--tricode-blue); background: var(--tricode-light); transform: translateX(5px); }
+        .opt-btn.selected { background: var(--tricode-blue); color: white; border-color: var(--tricode-blue); box-shadow: 0 6px 15px rgba(0, 74, 153, 0.2); }
 
-        .hidden { display: none; }
-        
-        /* Result Screen */
-        .score-circle {
-            width: 180px; height: 180px; border-radius: 50%;
-            background: conic-gradient(var(--tricode-blue) 0%, #e9ecef 0%);
-            display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 30px;
+        .hidden { display: none !important; }
+
+        /* Motivation Quote Style */
+        .quote-box {
+            background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-style: italic;
+            font-size: 1.2rem;
+            font-weight: 500;
+            box-shadow: 0 10px 25px rgba(0, 114, 255, 0.3);
+            margin-top: 25px;
         }
-        .score-inner {
-            width: 150px; height: 150px; background: white; border-radius: 50%;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
+
+        .btn-custom {
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
         }
+        .btn-custom-primary { background: var(--tricode-blue); color: white; border: none; box-shadow: 0 6px 15px rgba(0, 74, 153, 0.3); }
+        .btn-custom-primary:hover { background: #003672; color: white; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0, 74, 153, 0.4); }
     </style>
 </head>
 <body>
 
-<div class="container exam-container">
-    <div class="card">
-        <div class="header">
-            <!-- Logo Uncommented as requested -->
-            <img src="FINAL_LOGO-removebg-preview.png" alt="Logo" width="80" class="mb-3">
-            <h1 class="brand-title">TRICODE ACADEMY</h1>
-            <div class="brand-sub">Professional C Assessment</div>
+<!-- Header -->
+<div class="header d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center gap-3">
+        <!-- Logo -->
+        <img src="FINAL_LOGO-removebg-preview.png" alt="TriCode Academy" class="academy-logo">
+        <div class="d-none d-md-block">
+            <h4 class="mb-0 fw-bold" style="color: var(--tricode-blue); letter-spacing: 0.5px;">TriCode Academy</h4>
+            <small class="text-muted fw-bold">Professional Certification Exam</small>
         </div>
-
-        <div class="card-body p-4 p-md-5">
-            
-            <!-- 1. Start Screen -->
-            <div id="screen-start" class="text-center py-4">
-                <h3 class="mb-4">Final Certification Exam</h3>
-                <div class="alert alert-light border text-start d-inline-block mx-auto mb-4" style="max-width: 600px;">
-                    <strong>Exam Rules:</strong>
-                    <ul class="mb-0 mt-2 small text-muted">
-                        <li>Total Questions: <strong>100</strong></li>
-                        <li>Duration: <strong>60 Minutes</strong></li>
-                        <li>Topics: Operators, If/Else, Loops, Switch, Arrays, Pointers.</li>
-                        <li>Type: MCQs & Code Completion.</li>
-                    </ul>
-                </div>
-                <div class="mb-4">
-                    <input type="text" id="studentName" class="form-control form-control-lg text-center mx-auto" style="max-width: 400px;" placeholder="Enter Student Full Name">
-                    <div id="nameError" class="text-danger small mt-2 hidden">Name is required!</div>
-                </div>
-                <button class="btn btn-primary btn-lg w-100 py-3 fw-bold" style="max-width: 400px;" onclick="initExam()">START EXAM</button>
-            </div>
-
-            <!-- 2. Quiz Screen -->
-            <div id="screen-quiz" class="hidden">
-                <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
-                    <div>
-                        <span class="badge bg-dark">Q <span id="q-idx">1</span> / 100</span>
-                        <span class="ms-2 text-muted fw-bold" id="user-badge">User</span>
-                    </div>
-                    <div class="timer-badge">
-                        ⏰ <span id="timer">60:00</span>
-                    </div>
-                </div>
-
-                <div class="question-area">
-                    <span class="q-category" id="q-cat">Topic</span>
-                    <div class="q-text" id="q-text">Question goes here...</div>
-                    
-                    <!-- Content Area (MCQ or Code) -->
-                    <div id="q-content"></div>
-                </div>
-
-                <div class="d-flex justify-content-between mt-5 pt-3 border-top">
-                    <button class="btn btn-outline-secondary px-4 fw-bold" id="btn-prev" onclick="nav(-1)">Previous</button>
-                    <button class="btn btn-primary px-5 fw-bold" id="btn-next" onclick="nav(1)">Next Question &rarr;</button>
-                </div>
-            </div>
-
-            <!-- 3. Result Screen -->
-            <div id="screen-result" class="hidden text-center py-4">
-                <h2 class="mb-4 fw-bold">Exam Submitted</h2>
-                <div class="score-circle" id="score-ring">
-                    <div class="score-inner">
-                        <h1 class="m-0 fw-bold text-primary" id="final-score">0</h1>
-                        <small class="text-muted">OUT OF 100</small>
-                    </div>
-                </div>
-                <h4 id="result-msg" class="fw-bold mb-2">Processing...</h4>
-                <p class="text-muted">Student: <span id="final-name"></span></p>
-                <button class="btn btn-dark mt-3" onclick="location.reload()">Return to Home</button>
-            </div>
-
-        </div>
+    </div>
+    <div id="top-timer" class="hidden">
+        <div class="timer-badge">⏳ <span id="timer">50:00</span></div>
     </div>
 </div>
 
+<div class="container my-5" style="max-width: 1050px;">
+    
+    <!-- Start Screen -->
+    <div id="screen-start" class="text-center py-5 bg-white rounded-4 shadow-lg border-0" style="padding: 60px 20px !important;">
+        <h1 class="fw-bold mb-4 text-dark" style="font-size: 2.5rem;">Begin Your Journey</h1>
+        <div class="alert alert-light border d-inline-block text-start mb-5 rounded-3 shadow-sm" style="font-size: 1.1rem; padding: 20px 30px;">
+            <ul class="mb-0 text-muted list-unstyled">
+                <li class="mb-2">📝 <strong>Total Questions:</strong> 50 (C Programming + Web Basics)</li>
+                <li class="mb-2">⏱️ <strong>Time Limit:</strong> 50 Minutes</li>
+                <li class="mb-2">💡 <strong>Format:</strong> MCQs & Fill in the Blanks (Code)</li>
+                <li>🎯 <strong>Tip:</strong> You can jump to any question using the number grid.</li>
+            </ul>
+        </div>
+        <div class="mb-5 mx-auto" style="max-width: 400px;">
+            <input type="text" id="studentName" class="form-control form-control-lg text-center shadow-sm" style="border: 2px solid #e9ecef; border-radius: 50px; padding: 15px;" placeholder="Enter Your Full Name">
+            <small id="nameError" class="text-danger mt-2 hidden fw-bold">Name is required to start!</small>
+        </div>
+        <button class="btn btn-custom btn-custom-primary btn-lg" style="font-size: 1.2rem; padding: 15px 50px;" onclick="initExam()">START EXAM NOW</button>
+    </div>
+
+    <!-- Quiz Screen -->
+    <div id="screen-quiz" class="hidden">
+        
+        <div class="row">
+            <!-- Navigation Grid -->
+            <div class="col-12 mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-3 px-2">
+                    <span class="fw-bold text-muted" style="font-size: 1.1rem;">Question Navigator</span>
+                    <span class="badge" style="background: var(--tricode-blue); font-size: 1rem; padding: 8px 15px; border-radius: 50px;" id="answered-count">Answered: 0 / 50</span>
+                </div>
+                <div class="grid-container" id="nav-grid">
+                    <!-- Buttons 1 to 50 generated by JS -->
+                </div>
+            </div>
+            
+            <!-- Question Area -->
+            <div class="col-12">
+                <div class="question-card position-relative">
+                    <div class="d-flex justify-content-between mb-4 align-items-center">
+                        <span class="q-category shadow-sm" id="q-cat">Category</span>
+                        <span class="fw-bold" style="font-size: 1.3rem; color: #636e72;">Question <span id="q-idx" style="color: var(--tricode-blue); font-size: 1.6rem;">1</span></span>
+                    </div>
+                    
+                    <div class="q-text" id="q-text">Question Text...</div>
+                    <div id="q-content"></div>
+
+                    <div class="d-flex justify-content-between mt-5 pt-4" style="border-top: 2px dashed #f1f2f6;">
+                        <button class="btn btn-outline-secondary btn-custom" id="btn-prev" onclick="nav(-1)">&#8592; Previous</button>
+                        <button class="btn btn-custom-primary btn-custom" id="btn-next" onclick="nav(1)">Next Question &#8594;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Result Screen -->
+    <div id="screen-result" class="hidden text-center py-5 bg-white rounded-4 shadow-lg" style="padding: 60px 20px !important;">
+        <h1 class="fw-bold text-dark mb-2" style="font-size: 3rem;">Exam Completed!</h1>
+        <p class="fs-4 text-muted mb-5">Candidate: <span id="final-name" class="fw-bold" style="color: var(--tricode-blue);"></span></p>
+        
+        <div style="width: 220px; height: 220px; border-radius: 50%; background: conic-gradient(var(--tricode-blue) 0%, #e9ecef 0%); display: flex; align-items: center; justify-content: center; margin: 0 auto 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);" id="score-ring">
+            <div style="width: 180px; height: 180px; background: white; border-radius: 50%; display: flex; flex-direction: column; justify-content: center; box-shadow: inset 0 5px 15px rgba(0,0,0,0.05);">
+                <h1 class="m-0 fw-bold" style="color: var(--tricode-blue); font-size: 4rem; line-height: 1;" id="final-score">0</h1>
+                <span class="text-muted fw-bold fs-5">/ 50</span>
+            </div>
+        </div>
+        
+        <h2 id="result-msg" class="fw-bold mb-3">Calculating...</h2>
+        
+        <!-- Motivational Quote Section -->
+        <div class="mx-auto mb-5" style="max-width: 600px;">
+            <div class="quote-box" id="motivational-quote">
+                "Loading inspiration..."
+            </div>
+        </div>
+
+        <button class="btn btn-dark btn-custom btn-lg shadow" onclick="location.reload()">Back to Dashboard</button>
+    </div>
+
+</div>
+
 <script>
-    // --- DATABASE: 100 Questions ---
-    // t: type (mcq/code), c: category, q: question, o: options (mcq), code: html (code), a: answer
+    // --- W3SCHOOLS STYLE DATABASE: 50 Questions (35 C + 15 HTML) ---
+    // Kept simple and normal as requested.
     const db = [
-        // --- 1. OPERATORS (10 Questions: Mostly Code) ---
-        {t:'code', c:'Operators', q:'Operator for remainder:', code:'int rem = 10 <input class="code-input" id="ans"> 3;', a:'%'},
-        {t:'code', c:'Operators', q:'Add and assign shorthand:', code:'x <input class="code-input" id="ans"> 5; // x = x + 5', a:'+='},
-        {t:'code', c:'Operators', q:'Logical AND:', code:'if (a > 0 <input class="code-input" id="ans"> b > 0)', a:'&&'},
-        {t:'code', c:'Operators', q:'Increment x by 1:', code:'x<input class="code-input" id="ans">;', a:'++'},
-        {t:'code', c:'Operators', q:'Get address of variable:', code:'int *p = <input class="code-input" id="ans">x;', a:'&'},
-        {t:'code', c:'Operators', q:'Ternary Operator:', code:'max = (a > b) <input class="code-input" id="ans"> a : b;', a:'?'},
-        {t:'code', c:'Operators', q:'Bitwise OR:', code:'int res = a <input class="code-input" id="ans"> b;', a:'|'},
-        {t:'code', c:'Operators', q:'Not Equal:', code:'if (x <input class="code-input" id="ans"> 0)', a:'!='},
-        {t:'code', c:'Operators', q:'Size of type:', code:'int size = <input class="code-input" id="ans">(int);', a:'sizeof'},
-        {t:'code', c:'Operators', q:'Access structure member:', code:'obj<input class="code-input" id="ans">member = 10;', a:'.'},
+        // --- C Functions (10) ---
+        {t:'mcq', c:'C Functions', q:'To create a function in C, you specify the name of the function followed by:', o:['Curly brackets {}', 'Parentheses ()', 'Square brackets []', 'Quotation marks ""'], a:1},
+        {t:'mcq', c:'C Functions', q:'Which keyword is used to specify that a function does not return any value?', o:['void', 'null', 'int', 'return'], a:0},
+        {t:'mcq', c:'C Functions', q:'Which keyword is used to send a value back from a function?', o:['send', 'get', 'return', 'break'], a:2},
+        {t:'mcq', c:'C Functions', q:'Every C program must have which of the following functions?', o:['start()', 'main()', 'run()', 'init()'], a:1},
+        {t:'code', c:'C Functions', q:'How do you call a function named myFunction?', code:'<input class="code-input" id="ans">();', a:'myFunction'},
+        {t:'mcq', c:'C Functions', q:'Can a function be called multiple times in a program?', o:['Yes', 'No', 'Only inside loops', 'Only twice'], a:0},
+        {t:'code', c:'C Functions', q:'Add the missing bracket to start the function body:', code:'void myFunction() <input class="code-input" id="ans">\n  printf("Hello");\n}', a:'{'},
+        {t:'code', c:'C Functions', q:'Complete the function to return the value 5:', code:'int getNumber() {\n  <input class="code-input" id="ans"> 5;\n}', a:'return'},
+        {t:'code', c:'C Functions', q:'Add the correct keyword for a function that returns nothing:', code:'<input class="code-input" id="ans"> printMessage() {\n  printf("Hi");\n}', a:'void'},
+        {t:'mcq', c:'C Functions', q:'What is the main advantage of using functions?', o:['Code reuse (write once, use many times)', 'Makes code run slower', 'Increases file size', 'Hides output'], a:0},
+        
+        // --- C Parameters (8) ---
+        {t:'mcq', c:'C Parameters', q:'Information can be passed to functions as a ________.', o:['parameter', 'loop', 'return', 'condition'], a:0},
+        {t:'mcq', c:'C Parameters', q:'Parameters act as ________ inside the function.', o:['functions', 'variables', 'operators', 'classes'], a:1},
+        {t:'code', c:'C Parameters', q:'Multiple parameters are separated by which symbol?', code:'void myFunc(int x <input class="code-input" id="ans"> int y)', a:','},
+        {t:'code', c:'C Parameters', q:'Pass the value 10 to the function:', code:'myFunction(<input class="code-input" id="ans">);', a:'10'},
+        {t:'mcq', c:'C Parameters', q:'If a function expects an `int` parameter, you must pass an `int` argument when calling it.', o:['True', 'False', 'Depends on compiler', 'Only in main()'], a:0},
+        {t:'code', c:'C Parameters', q:'Complete the parameter definition for a character array (string):', code:'void printName(<input class="code-input" id="ans"> name[]) {\n  printf("%s", name);\n}', a:'char'},
+        {t:'code', c:'C Parameters', q:'What should be the return type if the function returns x + y (both ints)?', code:'<input class="code-input" id="ans"> sum(int x, int y) {\n  return x + y;\n}', a:'int'},
+        {t:'mcq', c:'C Parameters', q:'What do we call the values passed into a function when we call it?', o:['Arguments', 'Return types', 'Pointers', 'Macros'], a:0},
 
-        // --- 2. BOOLEANS (5 Questions: Code/MCQ) ---
-        {t:'code', c:'Booleans', q:'Include bool support:', code:'#include <<input class="code-input" id="ans">.h>', a:'stdbool'},
-        {t:'code', c:'Booleans', q:'Boolean type keyword:', code:'<input class="code-input" id="ans"> flag = true;', a:'bool'},
-        {t:'mcq', c:'Booleans', q:'Integer value of true?', o:['0', '1', '-1', 'NULL'], a:1},
-        {t:'code', c:'Booleans', q:'Logical NOT:', code:'if (<input class="code-input" id="ans">flag)', a:'!'},
-        {t:'mcq', c:'Booleans', q:'Which value is false in C?', o:['1', '-1', '0', '0.5'], a:2},
+        // --- C Scope (7) ---
+        {t:'mcq', c:'C Scope', q:'A variable created inside a function is known as a:', o:['Global variable', 'Local variable', 'External variable', 'Constant'], a:1},
+        {t:'mcq', c:'C Scope', q:'A variable created outside of all functions is known as a:', o:['Local variable', 'Global variable', 'Internal variable', 'Static variable'], a:1},
+        {t:'mcq', c:'C Scope', q:'Local variables can be used anywhere in the entire program.', o:['True', 'False', 'Only in main()', 'Only if returning void'], a:1},
+        {t:'mcq', c:'C Scope', q:'Global variables can be used by any function in the program.', o:['True', 'False', 'Only in loops', 'Only in main()'], a:0},
+        {t:'code', c:'C Scope', q:'Identify the scope of variable y:', code:'int x = 5; // Global\nvoid myFunc() {\n  int y = 10; // <input class="code-input" id="ans"> variable\n}', a:'Local'},
+        {t:'mcq', c:'C Scope', q:'If a local and a global variable have the same name, which one is used inside the function?', o:['The global variable', 'The local variable', 'It causes an error', 'They are added together'], a:1},
+        {t:'code', c:'C Scope', q:'Declare a local integer variable `a` inside the function:', code:'void myFunc() {\n  <input class="code-input" id="ans"> a = 10;\n}', a:'int'},
 
-        // --- 3. IF-ELSE (20 Questions: Mostly Code) ---
-        {t:'code', c:'If-Else', q:'Start if block:', code:'<input class="code-input" id="ans">(x > 10) { }', a:'if'},
-        {t:'code', c:'If-Else', q:'Else block:', code:'} <input class="code-input" id="ans"> { printf("No"); }', a:'else'},
-        {t:'code', c:'If-Else', q:'Else If chain:', code:'else <input class="code-input" id="ans"> (x == 5)', a:'if'},
-        {t:'code', c:'If-Else', q:'Equality check:', code:'if (user <input class="code-input" id="ans"> 1)', a:'=='},
-        {t:'code', c:'If-Else', q:'Not Equal check:', code:'if (val <input class="code-input" id="ans"> 0)', a:'!='},
-        {t:'code', c:'If-Else', q:'Greater than:', code:'if (age <input class="code-input" id="ans"> 18)', a:'>'},
-        {t:'code', c:'If-Else', q:'Less or Equal:', code:'if (count <input class="code-input" id="ans"> 100)', a:'<='},
-        {t:'code', c:'If-Else', q:'Logical OR:', code:'if (x==1 <input class="code-input" id="ans"> y==1)', a:'||'},
-        {t:'code', c:'If-Else', q:'Block start symbol:', code:'if(true) <input class="code-input" id="ans">', a:'{'},
-        {t:'code', c:'If-Else', q:'Block end symbol:', code:'if(true) { ... <input class="code-input" id="ans">', a:'}'},
-        {t:'mcq', c:'If-Else', q:'if(0) executes?', o:['Yes', 'No', 'Error', 'Loop'], a:1},
-        {t:'mcq', c:'If-Else', q:'if(1) executes?', o:['Yes', 'No', 'Error', 'Loop'], a:0},
-        {t:'code', c:'If-Else', q:'Nested If:', code:'if(a) { <input class="code-input" id="ans">(b) { ... } }', a:'if'},
-        {t:'code', c:'If-Else', q:'Check if pointer is NULL:', code:'if (ptr == <input class="code-input" id="ans">)', a:'NULL'},
-        {t:'mcq', c:'If-Else', q:'Dangling else pairs with?', o:['Nearest if', 'First if', 'Last if', 'Random'], a:0},
-        {t:'code', c:'If-Else', q:'One line if (no braces):', code:'if(x) print(<input class="code-input" id="ans">);', a:'x'},
-        {t:'mcq', c:'If-Else', q:'Condition variable type?', o:['bool/int', 'void', 'struct', 'array'], a:0},
-        {t:'code', c:'If-Else', q:'Check even number:', code:'if (n <input class="code-input" id="ans"> 2 == 0)', a:'%'},
-        {t:'code', c:'If-Else', q:'Assignment in if (Mistake):', code:'if (x <input class="code-input" id="ans"> 5) // sets x to 5', a:'='},
-        {t:'mcq', c:'If-Else', q:'Can else exist without if?', o:['Yes', 'No', 'In loops', 'In main'], a:1},
+        // --- C Math (10) ---
+        {t:'mcq', c:'C Math', q:'Which header file must be included to use math functions?', o:['<stdio.h>', '<math.h>', '<string.h>', '<stdlib.h>'], a:1},
+        {t:'code', c:'C Math', q:'Include the math library:', code:'#include <<input class="code-input" id="ans">.h>', a:'math'},
+        {t:'mcq', c:'C Math', q:'Which function is used to calculate the square root of a number?', o:['sqr()', 'pow()', 'sqrt()', 'root()'], a:2},
+        {t:'code', c:'C Math', q:'Calculate the square root of 16:', code:'float result = <input class="code-input" id="ans">(16); // result is 4', a:'sqrt'},
+        {t:'mcq', c:'C Math', q:'Which function rounds a number UPWARDS to its nearest integer?', o:['floor()', 'round()', 'ceil()', 'up()'], a:2},
+        {t:'code', c:'C Math', q:'Round up the number 1.4 to 2.0:', code:'printf("%f", <input class="code-input" id="ans">(1.4));', a:'ceil'},
+        {t:'mcq', c:'C Math', q:'Which function rounds a number DOWNWARDS to its nearest integer?', o:['ceil()', 'down()', 'floor()', 'abs()'], a:2},
+        {t:'code', c:'C Math', q:'Round down the number 1.4 to 1.0:', code:'printf("%f", <input class="code-input" id="ans">(1.4));', a:'floor'},
+        {t:'mcq', c:'C Math', q:'Which function is used to calculate the power of a number (x to the power of y)?', o:['pow()', 'power()', 'exp()', 'sqrt()'], a:0},
+        {t:'code', c:'C Math', q:'Calculate 4 to the power of 2 (4 squared):', code:'int res = <input class="code-input" id="ans">(4, 2);', a:'pow'},
 
-        // --- 4. SWITCH (10 Questions: Mostly Code) ---
-        {t:'code', c:'Switch', q:'Start switch:', code:'<input class="code-input" id="ans">(grade) { ... }', a:'switch'},
-        {t:'code', c:'Switch', q:'Case label:', code:'<input class="code-input" id="ans"> 1: printf("One");', a:'case'},
-        {t:'code', c:'Switch', q:'Case separator:', code:'case 1<input class="code-input" id="ans">', a:':'},
-        {t:'code', c:'Switch', q:'Prevent fallthrough:', code:'case 1: ...; <input class="code-input" id="ans">;', a:'break'},
-        {t:'code', c:'Switch', q:'Default case:', code:'<input class="code-input" id="ans">: printf("Invalid");', a:'default'},
-        {t:'mcq', c:'Switch', q:'Switch works on?', o:['int/char', 'float', 'double', 'struct'], a:0},
-        {t:'code', c:'Switch', q:'Switch block start:', code:'switch(x) <input class="code-input" id="ans">', a:'{'},
-        {t:'mcq', c:'Switch', q:'Break is optional?', o:['Yes', 'No', 'Error', 'Always needed'], a:0},
-        {t:'code', c:'Switch', q:'Character case:', code:'case <input class="code-input" id="ans">A<input class="code-input" id="ans2">:', a:"'"},
-        {t:'mcq', c:'Switch', q:'Duplicate cases allowed?', o:['Yes', 'No', 'Compiler Warning', 'Runtime Error'], a:1},
+        // --- Web Development: HTML Basics & Text (9) ---
+        {t:'mcq', c:'HTML Basics', q:'What does HTML stand for?', o:['Hyper Text Preprocessor', 'Hyper Text Markup Language', 'Hyper Tool Multi Language', 'Home Tool Markup Language'], a:1},
+        {t:'code', c:'HTML Basics', q:'Which tag defines the root of an HTML document?', code:'<<input class="code-input" id="ans">>\n  <head></head>\n  <body></body>\n</html>', a:'html'},
+        {t:'mcq', c:'HTML Basics', q:'Choose the correct HTML element for the largest heading:', o:['<heading>', '<h6>', '<head>', '<h1>'], a:3},
+        {t:'code', c:'HTML Basics', q:'Write the tag for the largest heading:', code:'<<input class="code-input" id="ans">>This is a main title</h1>', a:'h1'},
+        {t:'mcq', c:'HTML Basics', q:'Choose the correct HTML element to define a paragraph:', o:['<p>', '<paragraph>', '<pg>', '<text>'], a:0},
+        {t:'code', c:'HTML Basics', q:'Write the tag to start a paragraph:', code:'<<input class="code-input" id="ans">>This is a paragraph.</p>', a:'p'},
+        {t:'mcq', c:'HTML Basics', q:'How many levels of headings does HTML have?', o:['3', '5', '6', '7'], a:2},
+        {t:'code', c:'HTML Basics', q:'Write the tag for the smallest heading:', code:'<<input class="code-input" id="ans">>Smallest Title</h6>', a:'h6'},
+        {t:'mcq', c:'HTML Basics', q:'Which section contains the visible page content in HTML?', o:['<head>', '<body>', '<footer>', '<title>'], a:1},
 
-        // --- 5. LOOPS (20 Questions: Mostly Code) ---
-        {t:'code', c:'Loops', q:'For loop keyword:', code:'<input class="code-input" id="ans">(int i=0; i<10; i++)', a:'for'},
-        {t:'code', c:'Loops', q:'While loop keyword:', code:'<input class="code-input" id="ans">(x > 0) { x--; }', a:'while'},
-        {t:'code', c:'Loops', q:'Do-while start:', code:'<input class="code-input" id="ans"> { ... } while(x);', a:'do'},
-        {t:'code', c:'Loops', q:'Do-while end:', code:'} <input class="code-input" id="ans">(x > 0);', a:'while'},
-        {t:'code', c:'Loops', q:'Do-while terminator:', code:'} while(x > 0)<input class="code-input" id="ans">', a:';'},
-        {t:'code', c:'Loops', q:'Infinite For Loop:', code:'for(;<input class="code-input" id="ans">;) {}', a:';'},
-        {t:'code', c:'Loops', q:'Loop Initialization:', code:'for(i=0<input class="code-input" id="ans"> i<10; i++)', a:';'},
-        {t:'code', c:'Loops', q:'Loop Condition:', code:'for(i=0; i<10<input class="code-input" id="ans"> i++)', a:';'},
-        {t:'code', c:'Loops', q:'Pre-increment:', code:'for(i=0; i<10; <input class="code-input" id="ans">i)', a:'++'},
-        {t:'code', c:'Loops', q:'Skip iteration:', code:'if(i==5) <input class="code-input" id="ans">;', a:'continue'},
-        {t:'code', c:'Loops', q:'Stop loop:', code:'if(found) <input class="code-input" id="ans">;', a:'break'},
-        {t:'mcq', c:'Loops', q:'Loop for array traversal?', o:['for', 'if', 'switch', 'struct'], a:0},
-        {t:'mcq', c:'Loops', q:'Minimum runs of while loop?', o:['0', '1', '10', 'Infinite'], a:0},
-        {t:'mcq', c:'Loops', q:'Minimum runs of do-while?', o:['0', '1', '10', 'Infinite'], a:1},
-        {t:'code', c:'Loops', q:'Nested loop var:', code:'for(int j=0; <input class="code-input" id="ans"><5; j++)', a:'j'},
-        {t:'code', c:'Loops', q:'Infinite While:', code:'while(<input class="code-input" id="ans">) { ... }', a:'1'},
-        {t:'code', c:'Loops', q:'Post-decrement:', code:'while(i<input class="code-input" id="ans">)', a:'--'},
-        {t:'code', c:'Loops', q:'Sentinel check:', code:'while(input <input class="code-input" id="ans"> -1)', a:'!='},
-        {t:'mcq', c:'Loops', q:'Entry controlled loops?', o:['for/while', 'do-while', 'switch', 'if'], a:0},
-        {t:'code', c:'Loops', q:'Scope of loop var:', code:'for(<input class="code-input" id="ans"> i=0; i<10; i++)', a:'int'},
-
-        // --- 6. BREAK/CONTINUE (10 Questions: Mostly Code) ---
-        {t:'code', c:'Control', q:'Exit switch/loop:', code:'<input class="code-input" id="ans">;', a:'break'},
-        {t:'code', c:'Control', q:'Jump to next iteration:', code:'<input class="code-input" id="ans">;', a:'continue'},
-        {t:'mcq', c:'Control', q:'Can break exit if-block?', o:['No (only switch/loop)', 'Yes', 'Sometimes', 'Always'], a:0},
-        {t:'code', c:'Control', q:'Return from function:', code:'<input class="code-input" id="ans"> 0;', a:'return'},
-        {t:'code', c:'Control', q:'Go to label:', code:'<input class="code-input" id="ans"> label;', a:'goto'},
-        {t:'code', c:'Control', q:'Define label:', code:'label<input class="code-input" id="ans"> printf("Here");', a:':'},
-        {t:'code', c:'Control', q:'Exit program:', code:'<input class="code-input" id="ans">(0);', a:'exit'},
-        {t:'mcq', c:'Control', q:'Break in nested loop exits?', o:['Inner loop', 'Outer loop', 'Both', 'None'], a:0},
-        {t:'mcq', c:'Control', q:'Continue in while goes to?', o:['Condition check', 'Next statement', 'Break', 'Exit'], a:0},
-        {t:'mcq', c:'Control', q:'Is goto recommended?', o:['No', 'Yes', 'Always', 'For loops'], a:0},
-
-        // --- 7. ARRAYS/STRINGS (10 Questions: Mostly Code) ---
-        {t:'code', c:'Arrays', q:'Declare array:', code:'int nums<input class="code-input" id="ans">;', a:'[]'},
-        {t:'code', c:'Arrays', q:'Size 10 array:', code:'int arr<input class="code-input" id="ans">;', a:'[10]'},
-        {t:'code', c:'Arrays', q:'Access first element:', code:'arr<input class="code-input" id="ans">', a:'[0]'},
-        {t:'code', c:'Arrays', q:'String null terminator:', code:'char s[] = "Hi<input class="code-input" id="ans">";', a:'\0'},
-        {t:'code', c:'Arrays', q:'String length func:', code:'int len = <input class="code-input" id="ans">(str);', a:'strlen'},
-        {t:'code', c:'Arrays', q:'String copy func:', code:'<input class="code-input" id="ans">(dest, src);', a:'strcpy'},
-        {t:'code', c:'Arrays', q:'Compare strings:', code:'if(<input class="code-input" id="ans">(s1, s2) == 0)', a:'strcmp'},
-        {t:'code', c:'Arrays', q:'String header:', code:'#include <<input class="code-input" id="ans">.h>', a:'string'},
-        {t:'code', c:'Arrays', q:'2D Array access:', code:'matrix[0]<input class="code-input" id="ans">', a:'[0]'},
-        {t:'mcq', c:'Arrays', q:'Array name represents?', o:['Base Address', 'First Value', 'Size', 'Type'], a:0},
-
-        // --- 8. USER INPUT (5 Questions: Mostly Code) ---
-        {t:'code', c:'Input', q:'Input function:', code:'<input class="code-input" id="ans">("%d", &n);', a:'scanf'},
-        {t:'code', c:'Input', q:'Address operator in input:', code:'scanf("%d", <input class="code-input" id="ans">var);', a:'&'},
-        {t:'code', c:'Input', q:'Format for integer:', code:'scanf("<input class="code-input" id="ans">", &i);', a:'%d'},
-        {t:'code', c:'Input', q:'Format for string:', code:'scanf("<input class="code-input" id="ans">", name);', a:'%s'},
-        {t:'code', c:'Input', q:'Read line with spaces:', code:'<input class="code-input" id="ans">(str, size, stdin);', a:'fgets'},
-
-        // --- 9. MEMORY ADDRESS (10 Questions: Mostly Code) ---
-        {t:'code', c:'Memory', q:'Declare pointer:', code:'int <input class="code-input" id="ans">ptr;', a:'*'},
-        {t:'code', c:'Memory', q:'Get variable address:', code:'p = <input class="code-input" id="ans">a;', a:'&'},
-        {t:'code', c:'Memory', q:'Dereference (Get Value):', code:'val = <input class="code-input" id="ans">ptr;', a:'*'},
-        {t:'code', c:'Memory', q:'Print address format:', code:'printf("<input class="code-input" id="ans">", ptr);', a:'%p'},
-        {t:'code', c:'Memory', q:'Null pointer:', code:'int *p = <input class="code-input" id="ans">;', a:'NULL'},
-        {t:'code', c:'Memory', q:'Allocate memory:', code:'ptr = <input class="code-input" id="ans">(sizeof(int));', a:'malloc'},
-        {t:'code', c:'Memory', q:'Free memory:', code:'<input class="code-input" id="ans">(ptr);', a:'free'},
-        {t:'code', c:'Memory', q:'Structure pointer access:', code:'ptr<input class="code-input" id="ans">member', a:'->'},
-        {t:'code', c:'Memory', q:'Reallocate memory:', code:'ptr = <input class="code-input" id="ans">(ptr, new_size);', a:'realloc'},
-        {t:'code', c:'Memory', q:'Memory header:', code:'#include <<input class="code-input" id="ans">.h>', a:'stdlib'}
+        // --- Web Development: Forms & Inputs (6) ---
+        {t:'mcq', c:'HTML Forms', q:'Which HTML tag is used to create a form for user input?', o:['<input>', '<form>', '<user>', '<data>'], a:1},
+        {t:'code', c:'HTML Forms', q:'Start a form tag:', code:'<<input class="code-input" id="ans"> action="/submit.php">', a:'form'},
+        {t:'mcq', c:'HTML Forms', q:'What is the correct HTML for creating a normal text input field?', o:['<textinput>', '<input type="text">', '<textfield>', '<input type="string">'], a:1},
+        {t:'code', c:'HTML Forms', q:'Specify the type for a normal text input:', code:'<input type="<input class="code-input" id="ans">" name="fname">', a:'text'},
+        {t:'mcq', c:'HTML Forms', q:'Which input type hides the text (shows dots/stars) for security?', o:['hidden', 'mask', 'secret', 'password'], a:3},
+        {t:'code', c:'HTML Forms', q:'Which tag defines a label for an input field?', code:'<<input class="code-input" id="ans"> for="email">Email:</label>', a:'label'}
     ];
 
-    // --- LOGIC ---
+    // --- STATE VARIABLES ---
     let curIdx = 0;
-    let userAns = new Array(100).fill("");
-    let timeLeft = 60 * 60; // 60 Minutes
+    let userAns = new Array(50).fill("");
+    let timeLeft = 50 * 60; // 50 Minutes
     let timerId;
-    let studentName = "";
+    let isSubmitted = false;
 
+    // --- MOTIVATIONAL QUOTES ---
+    const quotes = [
+        "Expert wo hota hai jo kabhi beginner tha. Keep Coding! 🚀",
+        "Coding sirf ek skill nahi, ek super power hai! 💪",
+        "Ghaltiyan (Bugs) sabit karti hain ke aap koshish kar rahe hain. 🐛",
+        "Success chhote chhote efforts ka result hoti hai. Great Job! 🌟",
+        "Code is like humor. When it's good, it explains itself. 😎"
+    ];
+
+    // --- INITIALIZATION ---
     function initExam() {
         const nameInput = document.getElementById('studentName');
         if (!nameInput.value.trim()) {
             document.getElementById('nameError').classList.remove('hidden');
             return;
         }
-        studentName = nameInput.value;
-        document.getElementById('user-badge').innerText = studentName;
         
         document.getElementById('screen-start').classList.add('hidden');
+        document.getElementById('top-timer').classList.remove('hidden');
         document.getElementById('screen-quiz').classList.remove('hidden');
         
+        buildGrid();
         renderQuestion();
         startTimer();
     }
 
     function startTimer() {
         timerId = setInterval(() => {
+            if(isSubmitted) { clearInterval(timerId); return; }
             timeLeft--;
             let m = Math.floor(timeLeft / 60);
             let s = timeLeft % 60;
             document.getElementById('timer').innerText = `${m}:${s < 10 ? '0'+s : s}`;
+            
+            if(timeLeft <= 300) { document.getElementById('timer').style.color = '#c0392b'; } // Red in last 5 mins
             if (timeLeft <= 0) submitExam();
         }, 1000);
+    }
+
+    // --- UI RENDERERS ---
+    function buildGrid() {
+        const grid = document.getElementById('nav-grid');
+        grid.innerHTML = '';
+        let answeredCount = 0;
+
+        for (let i = 0; i < db.length; i++) {
+            const btn = document.createElement('button');
+            btn.className = 'grid-btn shadow-sm';
+            btn.innerText = i + 1;
+            
+            // Check status
+            if (userAns[i] !== "") {
+                btn.classList.add('answered');
+                answeredCount++;
+            }
+            if (i === curIdx) {
+                btn.classList.add('current');
+            }
+
+            btn.onclick = () => {
+                curIdx = i;
+                renderQuestion();
+                buildGrid(); // Update grid highlights
+            };
+            grid.appendChild(btn);
+        }
+        document.getElementById('answered-count').innerText = `Answered: ${answeredCount} / 50`;
     }
 
     function renderQuestion() {
         const q = db[curIdx];
         document.getElementById('q-idx').innerText = curIdx + 1;
-        document.getElementById('q-cat').innerText = q.c + " SECTION";
+        document.getElementById('q-cat').innerText = q.c;
         document.getElementById('q-text').innerText = q.q;
         
         const contentDiv = document.getElementById('q-content');
@@ -306,98 +394,116 @@
         if (q.t === 'mcq') {
             q.o.forEach((opt, i) => {
                 const btn = document.createElement('button');
-                btn.className = `opt-btn ${userAns[curIdx] === i ? 'selected' : ''}`;
+                btn.className = `opt-btn shadow-sm ${userAns[curIdx] === i ? 'selected' : ''}`;
                 btn.innerText = opt;
                 btn.onclick = () => {
                     userAns[curIdx] = i;
                     renderQuestion(); // Re-render to show selection
+                    buildGrid();      // Update grid to green
                 };
                 contentDiv.appendChild(btn);
             });
         } else {
-            // Code Type
+            // Fill in the blank Code
             const codeWrap = document.createElement('div');
-            codeWrap.className = 'code-block';
+            codeWrap.className = 'code-block shadow-sm';
             codeWrap.innerHTML = q.code;
             contentDiv.appendChild(codeWrap);
             
             const input = document.getElementById('ans');
-            const input2 = document.getElementById('ans2');
-            
             if(input) {
                 input.value = userAns[curIdx];
                 input.focus();
-                input.oninput = (e) => { userAns[curIdx] = e.target.value; };
-            }
-            // For special case with two inputs (Switch char case)
-            if(input2) {
-                 // Simplification: just capture first input for logic, 
-                 // or complex logic needed. For this specific Q, let's assume simple 1 input logic 
-                 // or manual handling. For simplicity in this generator, I used 1 input mostly.
+                input.oninput = (e) => { 
+                    userAns[curIdx] = e.target.value.trim(); 
+                    buildGrid(); // Update grid on type
+                };
             }
         }
 
-        // Button Logic
+        // Navigation Buttons
         document.getElementById('btn-prev').disabled = (curIdx === 0);
         const nextBtn = document.getElementById('btn-next');
+        
         if (curIdx === db.length - 1) {
             nextBtn.innerHTML = 'SUBMIT EXAM';
-            nextBtn.classList.replace('btn-primary', 'btn-success');
+            nextBtn.classList.remove('btn-custom-primary');
+            nextBtn.style.background = '#20c997'; // Green
+            nextBtn.style.color = 'white';
         } else {
             nextBtn.innerHTML = 'Next Question &rarr;';
-            nextBtn.classList.replace('btn-success', 'btn-primary');
+            nextBtn.style.background = '';
+            nextBtn.classList.add('btn-custom-primary');
         }
     }
 
     function nav(dir) {
         if (dir === 1 && curIdx === db.length - 1) {
-            submitExam();
+            if(confirm("Are you sure you want to submit your exam? You cannot change answers after this.")) {
+                submitExam();
+            }
             return;
         }
         curIdx += dir;
         renderQuestion();
+        buildGrid();
     }
 
+    // --- SUBMIT & CALCULATE ---
     function submitExam() {
-        clearInterval(timerId);
+        isSubmitted = true;
         let score = 0;
+
         db.forEach((q, i) => {
             if (q.t === 'mcq') {
-                if (userAns[i] === q.a) score++;
+                if (userAns[i] !== "" && userAns[i] === q.a) score++;
             } else {
-                // Code answer check (insensitive)
-                if (userAns[i] && userAns[i].trim().toLowerCase() === q.a.toLowerCase()) score++;
+                // Ignore case for code inputs
+                if (userAns[i] && userAns[i].toLowerCase() === q.a.toLowerCase()) score++;
             }
         });
 
         document.getElementById('screen-quiz').classList.add('hidden');
+        document.getElementById('top-timer').classList.add('hidden');
         document.getElementById('screen-result').classList.remove('hidden');
         
-        document.getElementById('final-name').innerText = studentName;
+        document.getElementById('final-name').innerText = document.getElementById('studentName').value;
         
+        // Show random motivational quote
+        const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+        document.getElementById('motivational-quote').innerText = randomQuote;
+
         // Animated Score
         let currentScore = 0;
         const scoreEl = document.getElementById('final-score');
         const ring = document.getElementById('score-ring');
         const msg = document.getElementById('result-msg');
         
-        const anim = setInterval(() => {
-            if (currentScore >= score) {
-                clearInterval(anim);
-                // Feedback
-                if (score >= 90) { msg.innerText = "Outstanding! Professional Level. 🏆"; msg.className = "text-success fw-bold"; }
-                else if (score >= 70) { msg.innerText = "Great Job! Solid Skills. 🚀"; msg.className = "text-primary fw-bold"; }
-                else if (score >= 50) { msg.innerText = "Good Effort. Keep Practicing. 📚"; msg.className = "text-warning fw-bold"; }
-                else { msg.innerText = "Needs Improvement. Review Basics. ⚠️"; msg.className = "text-danger fw-bold"; }
-            } else {
-                currentScore++;
-                scoreEl.innerText = currentScore;
-                let perc = (currentScore / 100) * 100;
-                ring.style.background = `conic-gradient(#004a99 ${perc}%, #e9ecef ${perc}%)`;
-            }
-        }, 20);
+        if (score === 0) {
+            scoreEl.innerText = 0;
+            msg.innerText = "Needs Improvement. Review the W3Schools basics. ⚠️"; 
+            msg.className = "text-danger fw-bold";
+        } else {
+            const anim = setInterval(() => {
+                if (currentScore >= score) {
+                    clearInterval(anim);
+                    let perc = (score / 50) * 100;
+                    if (perc >= 85) { msg.innerText = "Outstanding! Full Stack Ready! 🏆"; msg.className = "text-success fw-bold"; }
+                    else if (perc >= 70) { msg.innerText = "Great Job! Solid Foundation. 🚀"; msg.className = "text-primary fw-bold"; }
+                    else if (perc >= 50) { msg.innerText = "Good Effort. Keep Practicing. 📚"; msg.className = "text-warning fw-bold"; }
+                    else { msg.innerText = "Needs Improvement. Review Concepts. ⚠️"; msg.className = "text-danger fw-bold"; }
+                } else {
+                    currentScore++;
+                    scoreEl.innerText = currentScore;
+                    let percAnim = (currentScore / 50) * 100;
+                    ring.style.background = `conic-gradient(var(--tricode-blue) ${percAnim}%, #e9ecef ${percAnim}%)`;
+                }
+            }, 35); // Animation speed
+        }
     }
 </script>
 
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
